@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 01:40:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 02:12:23 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:19:25 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_vector		g_vector(t_vertex org, t_vertex dst)
 {
 	t_vector	out;
 
-	out.org = org;
-	out.dst = dst;
-	out.vct = g_vertex(dst.x - org.x, dst.y - org.y, dst.z - org.z);
+	out.vct = g_vertex(dst.x - org.x, dst.y - org.y, dst.z - org.z, 1.0);
 	return (out);
 }

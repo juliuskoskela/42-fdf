@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 01:39:54 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 02:12:17 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:20:41 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,5 @@ t_vector		g_vct_nor(t_vector v)
 	out.vct.x = v.vct.x / mag;
 	out.vct.y = v.vct.y / mag;
 	out.vct.z = v.vct.z / mag;
-
-	out.dst.x = out.org.x + out.vct.x;
-	out.dst.y = out.org.y + out.vct.y;
-	out.dst.z = out.org.z + out.vct.z;
 	return (out);
 }

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vct_dot.c                                        :+:      :+:    :+:   */
+/*   g_mtx_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:29:22 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:24:30 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/04 21:03:30 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/04 21:05:59 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-double			g_vct_dot(t_vector a, t_vector b)
+typedef struct	s_matrix
 {
-	double	out;
+	/* data */
+}				t_matrix;
 
-	out = a.vct.x * b.vct.x + a.vct.y * b.vct.y + a.vct.z * b.vct.z;
-	return (out);
-}
+/*
+M | vtcX | vtcY | vtcZ | vtxO
+-----------------------------
+x | 1.00 | 0.00 | 0.00 | 0.00
+y | 0.00 | 1.00 | 0.00 | 0.00
+z | 0.00 | 0.00 | 1.00 | 0.00
+w | 0.00 | 0.00 | 0.00 | 1.00
+*/
