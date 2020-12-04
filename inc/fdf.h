@@ -38,4 +38,5 @@ t_vector		g_vct_scale(t_vector v, double scalar);
 t_vector		g_vct_cross(t_vector v);
 double			g_vct_dot(t_vector a, t_vector b);
 double			g_vct_mag(t_vector v);
+
 #endif
