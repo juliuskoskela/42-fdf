@@ -6,16 +6,23 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 21:03:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:05:59 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/06 03:10:35 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-typedef struct	s_matrix
+t_matrix		g_new_mtx(t_vector x, t_vector y, t_vector z)
 {
-	/* data */
-}				t_matrix;
+	t_vector	w;
+	t_matrix	out;
+
+	out.mx = x;
+	out.my = y;
+	out.mz = z;
+	out.mw = w;
+	return (out);
+}
 
 /*
 M | vtcX | vtcY | vtcZ | vtxO

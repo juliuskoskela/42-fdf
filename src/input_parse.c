@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vector.c                                         :+:      :+:    :+:   */
+/*   input_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:40:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 23:37:22 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/06 08:37:39 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../libft/inc/libft.h"
 
-t_vector		g_vector(t_vertex org, t_vertex dst)
-{
-	t_vector	out;
-
-	out.org = org;
-	out.vct = g_vertex(dst.x - org.x, dst.y - org.y, dst.z - org.z, 1.0);
-	return (out);
-}

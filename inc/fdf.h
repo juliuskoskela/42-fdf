@@ -8,23 +8,32 @@
 
 typedef struct	s_color
 {
-	uint16_t		r;
-	uint16_t		g;
-	uint16_t		b;
+	uint16_t	r;
+	uint16_t	g;
+	uint16_t	b;
 }				t_color;
 
 typedef struct	s_vertex
 {
-	double			x;
-	double			y;
-	double			z;
-	double			w;
+	double		x;
+	double		y;
+	double		z;
+	double		w;
 }				t_vertex;
 
 typedef struct	s_vector
 {
-	t_vertex		vct;
+	t_vertex	org;
+	t_vertex	vct;
 }				t_vector;
+
+typedef struct	s_matrix
+{
+	t_vector	mx;
+	t_vector	my;
+	t_vector	mz;
+	t_vector	mw;
+}				t_matrix;
 
 t_vertex		g_vertex(double x, double y, double z, double w);
 t_vector		g_vector(t_vertex org, t_vertex dst);
