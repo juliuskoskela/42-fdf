@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 12:11:19 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/06 21:25:03 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,36 @@ t_dlist			*input_parse(char *input_file)
 	row = 0;
 	i = 0;
 	j = 0;
-	sign = 0;
+	sign = 1;
 	out = NULL;
 	while (fd_readline(fd, &line) > 0)
 	{
 		while (line[i])
 		{
 			if (line[i] == '-')
+			{
 				sign = -1;
+				i++;
+			}
 			else if (is_digit(line[i]))
 			{
-				tmp[j] = line[i];
-				j++;
+				while (is_digit(line[i]))
+				{
+					tmp[j] = line[i];
+					i++;
+					j++;
+				}
+				j = 0;
 			}
 			else if (line[i] == ' ')
 			{
-				vtx = g_vertex(row, c_atoi(tmp), col, 1.0);
+				vtx = g_vertex(row, c_atoi(tmp) * sign, col, 1.0);
 				dl_putlast(&out, vtx);
+				while (line[i] == ' ')
+					i++;
 				row++;
-				j = 0;
+				sign = 1;
 			}
-			i++;
 		}
 		i = 0;
 		row = 0;
