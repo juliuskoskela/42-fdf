@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 11:58:37 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/06 21:11:47 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,20 @@ t_program		*init(char *input_file)
 
 void			p_vertex(t_vertex v)
 {
-	printf("v.x: %f v.y: %f v.z: %f v.z: %f", v.x, v.y, v.z, v.w);
+	printf("v.x: %f v.y: %f v.z: %f v.z: %f\n", v.x, v.y, v.z, v.w);
+}
+
+void			p_map(t_dlist **map)
+{
+	t_vertex	*tmp;
+
+	if ((*map)->next)
+	{
+		tmp = (*map)->content;
+		p_vertex(*tmp);
+		*map = (*map)->next;
+		p_map(map);
+	}
 }
 
 void			line_draw(t_program *p, t_vertex org, t_vertex dst)
@@ -70,13 +83,14 @@ void			line_draw(t_program *p, t_vertex org, t_vertex dst)
 int			main(int argc, char **argv)
 {
 	t_program	*p;
-	t_vertex	*org = g_vertex(0, 0, 0, 1.0);
-	t_vertex	*dst = g_vertex(200, 300, 0, 1.0);
+	// t_vertex	*org = g_vertex(0, 0, 0, 1.0);
+	// t_vertex	*dst = g_vertex(200, 300, 0, 1.0);
 
 	if (argc != 2)
 		return (0);
 	p = init(argv[1]);
-	line_draw(p, *org, *dst);
-	mlx_loop(p->mlx_ptr);
+	p_map(&p->map);
+	// line_draw(p, *org, *dst);
+	// mlx_loop(p->mlx_ptr);
 	return(0);
 }
