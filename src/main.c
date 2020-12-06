@@ -6,16 +6,17 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 08:50:20 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/06 11:58:37 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minilibx/mlx.h"
-#include "../libft/inc/libft.h"
+#include "stdio.h"
+#include "../inc/fdf.h"
 
 typedef struct		s_program
 {
 	char	*name;
+	t_dlist	*map;
 	int		resx;
 	int		resy;
 	void	*mlx_ptr;
@@ -23,34 +24,59 @@ typedef struct		s_program
 }					t_program;
 
 
-int		deal_key(int key, void *param)
+// int		deal_key(int key, void *param)
+// {
+// 	p_char('X');
+// 	return (0);
+// }
+
+t_program		*init(char *input_file)
 {
-	p_char('X');
-	return (0);
+	t_program	*out;
+
+	out = (t_program *)v_alloc(sizeof(t_program));
+	out->name = s_dup("fdf");
+	out->map = input_parse(input_file);
+	out->resx = 1280;
+	out->resy = 720;
+	out->mlx_ptr = mlx_init();
+	out->win_ptr = mlx_new_window(out->mlx_ptr, out->resx, out->resy, "fdf");
+	return (out);
 }
 
-t_program		*init()
-{
-	t_program	out;
+// void			key_callback()
+// {
+// 	mlx_key_hook(p->win_ptr, deal_key, (void *)0);
+// }
 
-	out.name = s_dup("fdf");
-	out.resx = 1280;
-	out.resy = 720;
-	out.mlx_ptr = mlx_init();
-	out.win_ptr = mlx_new_window(out.mlx_ptr, out.resx, out.resy, "fdf");
+void			p_vertex(t_vertex v)
+{
+	printf("v.x: %f v.y: %f v.z: %f v.z: %f", v.x, v.y, v.z, v.w);
 }
 
-void			line_draw(t_vertex org, t_vertex dst)
+void			line_draw(t_program *p, t_vertex org, t_vertex dst)
 {
+	t_vertex	tmp;
 
+	tmp = org;
+	while (tmp.x <= dst.x && tmp.y <= dst.y)
+	{
+		mlx_pixel_put(p->mlx_ptr, p->win_ptr, (int)tmp.x, (int)tmp.y, 0xFFFFFF);
+		tmp.x = tmp.x + 1.0;
+		tmp.y = tmp.y + 1.0;
+	}
 }
-int			main()
-{
-	t_program	p;
 
-	p = init();
-	mlx_pixel_put(p.mlx_ptr, p.win_ptr, 250, 250, 0xFFFFFF);
-	mlx_key_hook(p.win_ptr, deal_key, (void *)0);
-	mlx_loop(p.mlx_ptr);
+int			main(int argc, char **argv)
+{
+	t_program	*p;
+	t_vertex	*org = g_vertex(0, 0, 0, 1.0);
+	t_vertex	*dst = g_vertex(200, 300, 0, 1.0);
+
+	if (argc != 2)
+		return (0);
+	p = init(argv[1]);
+	line_draw(p, *org, *dst);
+	mlx_loop(p->mlx_ptr);
 	return(0);
 }
