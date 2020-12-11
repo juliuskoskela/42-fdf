@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vertex.c                                         :+:      :+:    :+:   */
+/*   g_vtxarr_append.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:41:08 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:39:21 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/08 08:50:00 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/08 08:52:04 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vertex		*g_vertex(double x, double y, double z, double w)
+void		g_vtxarr_append(t_vtxarr **ref, t_vertex *new)
 {
-	t_vertex	*out;
+	t_vtxarr	*temp;
+	t_vtxarr	*ptr;
 
-	out = (t_vertex *)v_alloc(sizeof(t_vertex));
-	out->x = x;
-	out->y = y;
-	out->z = z;
-	out->w = w;
-	return (out);
+	ptr = NULL;
+	temp = (t_vtxarr *)malloc(sizeof(t_vtxarr));
+	temp->vtx = new;
+	temp->prev = NULL;
+	temp->next = NULL;
+	if (*ref == NULL)
+		(*ref) = temp;
+	else
+	{
+		ptr = (*ref);
+		while (ptr->next != NULL)
+			ptr = ptr->next;
+		temp->prev = ptr;
+		ptr->next = temp;
+	}
 }

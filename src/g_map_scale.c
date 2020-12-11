@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vertex.c                                         :+:      :+:    :+:   */
+/*   g_map_scale.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:41:08 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:39:21 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/06 21:38:48 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/10 11:53:48 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vertex		*g_vertex(double x, double y, double z, double w)
+void			g_map_scale(t_vtxarr **map, double scalar)
 {
-	t_vertex	*out;
-
-	out = (t_vertex *)v_alloc(sizeof(t_vertex));
-	out->x = x;
-	out->y = y;
-	out->z = z;
-	out->w = w;
-	return (out);
+	while (*map)
+	{
+		g_vtx_scale((*map)->vtx, scalar);
+		*map = (*map)->next;
+	}
 }

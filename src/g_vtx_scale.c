@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vertex.c                                         :+:      :+:    :+:   */
+/*   g_vtx_scale.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:41:08 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:39:21 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/04 13:24:50 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/10 11:50:31 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vertex		*g_vertex(double x, double y, double z, double w)
+void		g_vtx_scale(t_vertex *v, double scalar)
 {
-	t_vertex	*out;
-
-	out = (t_vertex *)v_alloc(sizeof(t_vertex));
-	out->x = x;
-	out->y = y;
-	out->z = z;
-	out->w = w;
-	return (out);
+	v->x = v->x * scalar;
+	v->y = v->y * scalar;
+	v->z = v->z * scalar;
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vct_scale.c                                      :+:      :+:    :+:   */
+/*   g_drawline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:24:50 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:21:57 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/08 08:31:21 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/08 09:32:54 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vector		g_vct_scale(t_vector v, double scalar)
+void			g_drawline(t_program *p, t_vertex org, t_vertex dst)
 {
-	t_vector	out;
+	t_vertex	tmp;
 
-	out.vct.x = v.vct.x * scalar;
-	out.vct.y = v.vct.y * scalar;
-	out.vct.z = v.vct.z * scalar;
-	return (out);
+	tmp = org;
+	while (tmp.x <= dst.x && tmp.y <= dst.y)
+	{
+		mlx_pixel_put(p->mlx_ptr, p->win_ptr, (int)tmp.x, (int)tmp.y, 0xFFFFFF);
+		tmp.x = tmp.x + 1.0;
+		tmp.y = tmp.y + 1.0;
+	}
 }

@@ -8,36 +8,38 @@
 # include "../libft/inc/libft.h"
 # include "../inc/mlx.h"
 
-typedef struct	s_color
+typedef struct		s_vtxarr
 {
-	uint16_t	r;
-	uint16_t	g;
-	uint16_t	b;
-}				t_color;
+	t_vertex		*vtx;
+	struct s_vtxarr	*next;
+	struct s_vtxarr	*prev;
+}					t_vtxarr;
 
-typedef struct	s_vector
+typedef struct		s_matrix
 {
-	t_vertex	org;
-	t_vertex	vct;
-}				t_vector;
+	int				fov;
+	t_vertex		*mx;
+	t_vertex		*my;
+	t_vertex		*mz;
+	t_vertex		*mw;
+}					t_matrix;
 
-typedef struct	s_matrix
+typedef struct		s_program
 {
-	t_vector	mx;
-	t_vector	my;
-	t_vector	mz;
-	t_vector	mw;
-}				t_matrix;
+	char			*name;
+	t_vtxarr		*map;
+	int				resx;
+	int				resy;
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_program;
 
-t_vector		g_vector(t_vertex org, t_vertex dst);
-t_vector		g_vct_nor(t_vector v);
-t_vector		g_vct_sub(t_vector a, t_vector b);
-t_vector		g_vct_add(t_vector a, t_vector b);
-t_vector		g_vct_ref(t_vector v);
-t_vector		g_vct_scale(t_vector v, double scalar);
-t_vector		g_vct_cross(t_vector a, t_vector b);
-double			g_vct_dot(t_vector a, t_vector b);
-double			g_vct_mag(t_vector v);
-t_dlist			*input_parse(char *input_file);
+void			g_vtxarr_append(t_vtxarr **ref, t_vertex *new);
+void			g_vtx_scale(t_vertex *v, double scalar);
+void			g_map_scale(t_vtxarr **map, double scalar);
+t_vtxarr		*input_parse(char *input_file);
+void			g_drawline(t_program *p, t_vertex org, t_vertex dst);
+t_program		*init(char *input_file);
+t_vertex		*g_vertex(double x, double y, double z, double w);
 
 #endif

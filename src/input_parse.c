@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 21:30:35 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:54:37 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_dlist			*input_parse(char *input_file)
+t_vtxarr		*input_parse(char *input_file)
 {
 	int			fd;
 	int			row;
@@ -22,7 +22,7 @@ t_dlist			*input_parse(char *input_file)
 	int			sign;
 	char		tmp[10];
 	char		*line;
-	t_dlist		*out;
+	t_vtxarr	*out;
 	t_vertex	*vtx;
 
 	fd = open(input_file, O_RDONLY);
@@ -44,17 +44,13 @@ t_dlist			*input_parse(char *input_file)
 			else if (is_digit(line[i]))
 			{
 				while (is_digit(line[i]))
-				{
-					tmp[j] = line[i];
-					i++;
-					j++;
-				}
+					tmp[j++] = line[i++];
 				j = 0;
 			}
 			else if (line[i] == ' ')
 			{
 				vtx = g_vertex(row, c_atoi(tmp) * sign, col, 1.0);
-				dl_putlast(&out, vtx);
+				g_vtxarr_append(&out, vtx);
 				while (line[i] == ' ')
 					i++;
 				row++;
@@ -65,7 +61,7 @@ t_dlist			*input_parse(char *input_file)
 		row = 0;
 		col++;
 	}
-	dl_putlast(&out, vtx);
+	g_vtxarr_append(&out, vtx);
 	close(fd);
 	return (out);
 }

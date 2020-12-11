@@ -6,15 +6,21 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/06 11:55:03 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/10 10:07:11 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 
 # src / obj files
-SRC		= main.c \
-		  input_parse.c
+SRC		=	main.c \
+			g_vertex.c \
+			input_parse.c \
+			g_vtx_scale.c \
+			g_map_scale.c \
+			g_drawline.c \
+			init.c \
+			g_vtxarr_append.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
@@ -27,6 +33,7 @@ MLX		= ./minilibx/
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
 MLX_INC	= -I /usr/X11/include -g
 MLX_LNK	= -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+
 # ft library
 FT		= ./libft/
 FT_LIB	= $(addprefix $(FT),libft.a)

@@ -6,23 +6,12 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 21:11:47 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/10 12:00:19 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdio.h"
 #include "../inc/fdf.h"
-
-typedef struct		s_program
-{
-	char	*name;
-	t_dlist	*map;
-	int		resx;
-	int		resy;
-	void	*mlx_ptr;
-	void	*win_ptr;
-}					t_program;
-
 
 // int		deal_key(int key, void *param)
 // {
@@ -30,19 +19,6 @@ typedef struct		s_program
 // 	return (0);
 // }
 
-t_program		*init(char *input_file)
-{
-	t_program	*out;
-
-	out = (t_program *)v_alloc(sizeof(t_program));
-	out->name = s_dup("fdf");
-	out->map = input_parse(input_file);
-	out->resx = 1280;
-	out->resy = 720;
-	out->mlx_ptr = mlx_init();
-	out->win_ptr = mlx_new_window(out->mlx_ptr, out->resx, out->resy, "fdf");
-	return (out);
-}
 
 // void			key_callback()
 // {
@@ -54,43 +30,58 @@ void			p_vertex(t_vertex v)
 	printf("v.x: %f v.y: %f v.z: %f v.z: %f\n", v.x, v.y, v.z, v.w);
 }
 
-void			p_map(t_dlist **map)
+void			p_map(t_program *p, t_vtxarr **map)
 {
-	t_vertex	*tmp;
-
 	if ((*map)->next)
 	{
-		tmp = (*map)->content;
-		p_vertex(*tmp);
+		g_drawline(p, *(*map)->vtx, *(*map)->next->vtx);
+		p_vertex(*(*map)->vtx);
 		*map = (*map)->next;
-		p_map(map);
+		p_map(p, map);
 	}
 }
 
-void			line_draw(t_program *p, t_vertex org, t_vertex dst)
+// Projection matrix ortho
+// 100
+// 010
+double		vtx_mult(t_vertex a, t_vertex b)
 {
-	t_vertex	tmp;
+	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+}
 
-	tmp = org;
-	while (tmp.x <= dst.x && tmp.y <= dst.y)
-	{
-		mlx_pixel_put(p->mlx_ptr, p->win_ptr, (int)tmp.x, (int)tmp.y, 0xFFFFFF);
-		tmp.x = tmp.x + 1.0;
-		tmp.y = tmp.y + 1.0;
-	}
+t_vertex		*mtx_mult(t_matrix mtx, t_vertex vtx)
+{
+	t_vertex	*out;
+
+	out = (t_vertex *)v_alloc(sizeof(t_vertex));
+	out->x = vtx_mult(*mtx.mx, vtx);
+	out->y = vtx_mult(*mtx.my, vtx);
+	out->z = vtx_mult(*mtx.mz, vtx);
+	out->w = vtx_mult(*mtx.mw, vtx);
+	return (out);
+}
+
+t_matrix		*ortho_projection()
+{
+	t_matrix	*out;
+
+	out = (t_matrix *)v_alloc(sizeof(t_matrix));
+	out->mx = g_vertex(1.0, 0.0, 0.0, 1.0);
+	out->my = g_vertex(0.0, 1.0, 0.0, 1.0);
+	out->mz = g_vertex(0.0, 0.0, 0.0, 1.0);
+	out->mw = g_vertex(0.0, 0.0, 0.0, 1.0);
+	return (0);
 }
 
 int			main(int argc, char **argv)
 {
 	t_program	*p;
-	// t_vertex	*org = g_vertex(0, 0, 0, 1.0);
-	// t_vertex	*dst = g_vertex(200, 300, 0, 1.0);
 
 	if (argc != 2)
 		return (0);
 	p = init(argv[1]);
-	p_map(&p->map);
-	// line_draw(p, *org, *dst);
-	// mlx_loop(p->mlx_ptr);
+	//g_map_scale(&p->map, 10);
+	p_map(p, &p->map);
+	mlx_loop(p->mlx_ptr);
 	return(0);
 }
