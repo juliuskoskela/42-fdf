@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vct_dot.c                                        :+:      :+:    :+:   */
+/*   mtx_rot_z.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:29:22 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:24:30 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/12 04:19:33 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/12 04:19:35 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-double			g_vct_dot(t_vector a, t_vector b)
+t_matrix		*mtx_rot_z(double angle)
 {
-	double	out;
+	t_matrix	*out;
 
-	out = a.vct.x * b.vct.x + a.vct.y * b.vct.y + a.vct.z * b.vct.z;
+	out = mtx_id(1);
+	out->mx->x = cos(angle);
+	out->my->x = -sin(angle);
+	out->mx->z = sin(angle);
+	out->my->z = cos(angle);
+	out->mz->z = 1;
 	return (out);
 }

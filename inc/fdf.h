@@ -42,4 +42,16 @@ void			g_drawline(t_program *p, t_vertex org, t_vertex dst);
 t_program		*init(char *input_file);
 t_vertex		*g_vertex(double x, double y, double z, double w);
 
+/*
+** Matrix
+*/
+t_matrix		*mtx_id(double scl);
+t_matrix		*mtx_projection(double fov, double ratio, double near, double far);
+t_matrix		*mtx_rot_x(double angle);
+t_matrix		*mtx_rot_y(double angle);
+t_matrix		*mtx_rot_z(double angle);
+t_matrix		*mtx_translation(t_vertex *vtx);
+t_vertex		mtx_vtx(t_matrix *mtx, t_vertex vtx);
+void			p_matrix(t_matrix *mtx);
+
 #endif

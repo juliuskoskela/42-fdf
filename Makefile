@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/10 10:07:11 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/12 04:29:31 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,15 @@ SRC		=	main.c \
 			g_map_scale.c \
 			g_drawline.c \
 			init.c \
-			g_vtxarr_append.c
+			g_vtxarr_append.c \
+			mtx_id.c \
+			mtx_projection.c \
+			mtx_rot_x.c \
+			mtx_rot_y.c \
+			mtx_rot_z.c \
+			mtx_translation.c \
+			mtx_vtx.c \
+			p_matrix.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

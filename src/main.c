@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 12:00:19 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/12 04:28:46 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,36 @@ t_matrix		*ortho_projection()
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int				main(void)
 {
-	t_program	*p;
-
-	if (argc != 2)
-		return (0);
-	p = init(argv[1]);
-	//g_map_scale(&p->map, 10);
-	p_map(p, &p->map);
-	mlx_loop(p->mlx_ptr);
-	return(0);
+	double		fov = 60;
+	double		angle = 18.5;
+	double		ratio = 16 / 9;
+	double		near = 1.0;
+	double		far = -50.0;
+	t_vertex	*vtx = g_vertex(10, 5, 7, 1);
+	t_matrix	*rot_x = mtx_rot_x(angle);
+	t_matrix	*rot_y = mtx_rot_y(angle);
+	t_matrix	*rot_z = mtx_rot_z(angle);
+	t_matrix	*trans = mtx_translation(vtx);
+	t_matrix	*proj = mtx_projection(fov, ratio, near, far);
+	p_matrix(rot_x);
+	p_matrix(rot_y);
+	p_matrix(rot_z);
+	p_matrix(trans);
+	p_matrix(proj);
+	return (0);
 }
+
+// int			main(int argc, char **argv)
+// {
+// 	t_program	*p;
+
+// 	if (argc != 2)
+// 		return (0);
+// 	p = init(argv[1]);
+// 	//g_map_scale(&p->map, 10);
+// 	p_map(p, &p->map);
+// 	mlx_loop(p->mlx_ptr);
+// 	return(0);
+// }

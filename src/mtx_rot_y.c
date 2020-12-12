@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vct_cross.c                                      :+:      :+:    :+:   */
+/*   mtx_rot_y.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:46:17 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:22:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/12 04:19:13 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/12 04:19:14 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vector		g_vct_cross(t_vector a, t_vector b)
+t_matrix		*mtx_rot_y(double angle)
 {
-	t_vector	out;
+	t_matrix	*out;
 
-	out.vct.x = a.vct.y * b.vct.z - a.vct.z * b.vct.y;
-	out.vct.y = a.vct.z * b.vct.x - a.vct.x * b.vct.z;
-	out.vct.z = a.vct.x * b.vct.y - a.vct.y * b.vct.x;
+	out = mtx_id(1);
+	out->mx->x = cos(angle);
+	out->mz->x = sin(angle);
+	out->my->y = 1;
+	out->mx->z = -sin(angle);
+	out->mz->z = cos(angle);
 	return (out);
 }

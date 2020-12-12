@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vct_sub.c                                        :+:      :+:    :+:   */
+/*   mtx_translation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:44:24 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 21:25:05 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/12 04:18:29 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/12 04:18:31 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vector		g_vct_sub(t_vector a, t_vector b)
+t_matrix		*mtx_translation(t_vertex *vtx)
 {
-	t_vector	out;
+	t_matrix	*out;
 
-	out.vct.x = a.vct.x - b.vct.x;
-	out.vct.y = a.vct.y - b.vct.y;
-	out.vct.z = a.vct.z - b.vct.z;
+	out = mtx_id(1);
+	out->mx->w = vtx->x;
+	out->my->w = vtx->y;
+	out->mz->w = vtx->z;
 	return (out);
 }
