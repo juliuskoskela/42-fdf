@@ -8,6 +8,14 @@
 # include "../libft/inc/libft.h"
 # include "../inc/mlx.h"
 
+typedef struct		s_vertex
+{
+	double			x;
+	double			y;
+	double			z;
+	double			w;
+}					t_vertex;
+
 typedef struct		s_vtxarr
 {
 	t_vertex		*vtx;
@@ -52,6 +60,7 @@ t_matrix		*mtx_rot_y(double angle);
 t_matrix		*mtx_rot_z(double angle);
 t_matrix		*mtx_translation(t_vertex *vtx);
 t_vertex		mtx_vtx(t_matrix *mtx, t_vertex vtx);
-void			p_matrix(t_matrix *mtx);
+void			p_matrix(t_matrix *mtx, char *name);
+t_matrix		*mtx_multiply(t_matrix *a, t_matrix *b);
 
 #endif

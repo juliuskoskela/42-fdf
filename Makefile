@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/12 04:29:31 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/12 13:30:43 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC		=	main.c \
 			mtx_rot_z.c \
 			mtx_translation.c \
 			mtx_vtx.c \
+			mtx_multiply.c \
 			p_matrix.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))

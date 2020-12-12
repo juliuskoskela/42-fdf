@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 04:18:29 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:18:31 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/12 07:58:06 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_matrix		*mtx_translation(t_vertex *vtx)
 	t_matrix	*out;
 
 	out = mtx_id(1);
-	out->mx->w = vtx->x;
-	out->my->w = vtx->y;
-	out->mz->w = vtx->z;
+	out->mw->x = vtx->x;
+	out->mw->y = vtx->y;
+	out->mw->z = vtx->z;
 	return (out);
 }

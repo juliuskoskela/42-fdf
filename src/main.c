@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:28:46 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/12 16:12:25 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,31 @@ t_matrix		*ortho_projection()
 	out->my = g_vertex(0.0, 1.0, 0.0, 1.0);
 	out->mz = g_vertex(0.0, 0.0, 0.0, 1.0);
 	out->mw = g_vertex(0.0, 0.0, 0.0, 1.0);
-	return (0);
+	return (out);
+}
+
+t_matrix		*testmtx1()
+{
+	t_matrix	*out;
+
+	out = (t_matrix *)v_alloc(sizeof(t_matrix));
+	out->mx = g_vertex(10, 10, 10, 10);
+	out->my = g_vertex(5.5, 5.5, 5.5, 5.5);
+	out->mz = g_vertex(4, 4, 4, 4);
+	out->mw = g_vertex(1, 5, 5, 1);
+	return (out);
+}
+
+t_matrix		*testmtx2()
+{
+	t_matrix	*out;
+
+	out = (t_matrix *)v_alloc(sizeof(t_matrix));
+	out->mx = g_vertex(1, 2, 3, 4);
+	out->my = g_vertex(5, 6, 7, 8);
+	out->mz = g_vertex(9, 10, 11, 12);
+	out->mw = g_vertex(13, 14, 15, 16);
+	return (out);
 }
 
 int				main(void)
@@ -86,11 +110,15 @@ int				main(void)
 	t_matrix	*rot_z = mtx_rot_z(angle);
 	t_matrix	*trans = mtx_translation(vtx);
 	t_matrix	*proj = mtx_projection(fov, ratio, near, far);
-	p_matrix(rot_x);
-	p_matrix(rot_y);
-	p_matrix(rot_z);
-	p_matrix(trans);
-	p_matrix(proj);
+	t_matrix	*mtx1 = testmtx1();
+	t_matrix	*mtx2 = testmtx2();
+	t_matrix	*multi = mtx_multiply(mtx1, mtx2);
+	p_matrix(rot_x, "X");
+	p_matrix(rot_y, "Y");
+	p_matrix(rot_z, "Z");
+	p_matrix(trans, "T");
+	p_matrix(proj, "P");
+	p_matrix(multi, "M");
 	return (0);
 }
 
