@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:48:58 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/13 20:52:27 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ t_dlist		*input_parse(char *input_file)
 				sign = 1;
 			}
 		}
+		vtx = (double *)v_alloc(sizeof(double) * 4);
+		vtx[0] = row;
+		vtx[1] = c_atoi(tmp) * sign;
+		vtx[2] = col;
+		vtx[3] = 1.0;
+		dl_putlast(&out, vtx);
+		sign = 1;
 		i = 0;
 		row = 0;
 		col++;

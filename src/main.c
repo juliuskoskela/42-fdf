@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 20:18:23 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/13 20:37:12 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_program		*init(char *file)
 	out->map = input_parse(file);
 	out->resx = 1280;
 	out->resy = 720;
-	out->ratio = out->resx  / out->resy;
+	out->ratio = out->resx / out->resy;
 	out->fov = 60.0;
 	out->near = 1.0;
-	out->far = 100.0;
-	out->scale = 10.0;
+	out->far = -50.0;
+	out->scale = 1.0;
 	out->angle_x = -10.0;
 	out->angle_y = 0.0;
 	out->angle_z = 15.0;
@@ -87,6 +87,8 @@ int				main(int argc, char **argv)
 	fdf = init(argv[1]);
 	newmap = transform_map(fdf);
 	p_map(&fdf->map);
+	p_str("\n");
 	p_map(&newmap);
+	printf("\n%f", fdf->ratio);
 	return(0);
 }

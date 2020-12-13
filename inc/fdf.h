@@ -20,8 +20,8 @@ typedef struct		s_program
 {
 	char			*name;
 	t_dlist			*map;
-	int				resx;
-	int				resy;
+	double			resx;
+	double			resy;
 	double			ratio;
 	double			near;
 	double			far;
