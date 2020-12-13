@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_mtx_new.c                                        :+:      :+:    :+:   */
+/*   g_vtx_scale.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 21:03:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/06 03:10:35 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/04 13:24:50 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_matrix		g_new_mtx(t_vector x, t_vector y, t_vector z)
+void		g_vtx_scale(t_vertex *v, double scalar)
 {
-	t_vector	w;
-	t_matrix	out;
-
-	out.mx = x;
-	out.my = y;
-	out.mz = z;
-	out.mw = w;
-	return (out);
+	v->x = v->x * scalar;
+	v->y = v->y * scalar;
+	v->z = v->z * scalar;
 }
-
-/*
-M | vtcX | vtcY | vtcZ | vtxO
------------------------------
-x | 1.00 | 0.00 | 0.00 | 0.00
-y | 0.00 | 1.00 | 0.00 | 0.00
-z | 0.00 | 0.00 | 1.00 | 0.00
-w | 0.00 | 0.00 | 0.00 | 1.00
-*/

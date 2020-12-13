@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   g_vtxarr_append.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/08 08:50:00 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+void		g_vtxarr_append(t_vtxarr **ref, t_vertex *new)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
-	t_mtx		*out;
+	t_vtxarr	*temp;
+	t_vtxarr	*ptr;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
+	ptr = NULL;
+	temp = (t_vtxarr *)malloc(sizeof(t_vtxarr));
+	temp->vtx = new;
+	temp->prev = NULL;
+	temp->next = NULL;
+	if (*ref == NULL)
+		(*ref) = temp;
+	else
 	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
-		i++;
-		k++;
+		ptr = (*ref);
+		while (ptr->next != NULL)
+			ptr = ptr->next;
+		temp->prev = ptr;
+		ptr->next = temp;
 	}
-	return (out);
 }

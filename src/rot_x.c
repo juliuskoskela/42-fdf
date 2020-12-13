@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   rot_x.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:54:11 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:09:16 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+t_mtx			*rot_x(double angle)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
 	t_mtx		*out;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
-	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
-		i++;
-		k++;
-	}
-	return (out);
+	double		rot_x[16] = { 1.0, 0.0, 0.0, 0.0,
+							0.0, cos(angle), -sin(angle), 0.0,
+							0.0, sin(angle), cos(angle), 0.0,
+							0.0, 0.0, 0.0, 1.0, };
+	out = mtx_cpy(rot_x, 4, 4);
+	out->name = s_dup("X");
+	return(out);
 }

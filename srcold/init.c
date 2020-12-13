@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_drawline.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 08:31:21 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:05:01 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/08 08:34:18 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-void			g_drawline(t_program *p, t_vertex org, t_vertex dst)
+t_program		*init(char *input_file)
 {
-	t_vertex	tmp;
+	t_program	*out;
 
-	tmp = org;
-	while (tmp.x <= dst.x && tmp.y <= dst.y)
-	{
-		mlx_pixel_put(p->mlx_ptr, p->win_ptr, (int)tmp.x, (int)tmp.y, 0xFFFFFF);
-		tmp.x = tmp.x + 1.0;
-		tmp.y = tmp.y + 1.0;
-	}
+	out = (t_program *)v_alloc(sizeof(t_program));
+	out->name = s_dup("fdf");
+	out->map = input_parse(input_file);
+	out->resx = 1280;
+	out->resy = 720;
+	out->mlx_ptr = mlx_init();
+	out->win_ptr = mlx_new_window(out->mlx_ptr, out->resx, out->resy, "fdf");
+	return (out);
 }

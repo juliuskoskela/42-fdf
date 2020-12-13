@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vertex.c                                         :+:      :+:    :+:   */
+/*   mtx_id.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:41:08 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:39:21 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/12 04:17:58 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_vertex		*g_vertex(double x, double y, double z, double w)
+t_matrix		*mtx_id(double scl)
 {
-	t_vertex	*out;
+	t_matrix	*out;
 
-	out = (t_vertex *)v_alloc(sizeof(t_vertex));
-	out->x = x;
-	out->y = y;
-	out->z = z;
-	out->w = w;
+	out = (t_matrix *)v_alloc(sizeof(t_matrix));
+	out->mx = g_vertex(scl, 0.0, 0.0, 0.0);
+	out->my = g_vertex(0.0, scl, 0.0, 0.0);
+	out->mz = g_vertex(0.0, 0.0, scl, 0.0);
+	out->mw = g_vertex(0.0, 0.0, 0.0, 1.0);
 	return (out);
 }

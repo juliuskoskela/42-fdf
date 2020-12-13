@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   g_map_scale.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/06 21:38:48 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+void			g_map_scale(t_vtxarr **map, double scalar)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
-	t_mtx		*out;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
+	while (*map)
 	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
-		i++;
-		k++;
+		g_vtx_scale((*map)->vtx, scalar);
+		*map = (*map)->next;
 	}
-	return (out);
 }

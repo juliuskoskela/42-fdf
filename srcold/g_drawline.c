@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_id.c                                           :+:      :+:    :+:   */
+/*   g_drawline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 04:17:58 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:17:59 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/08 08:31:21 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_matrix		*mtx_id(double scl)
+void			g_drawline(t_program *p, t_vertex org, t_vertex dst)
 {
-	t_matrix	*out;
+	t_vertex	tmp;
 
-	out = (t_matrix *)v_alloc(sizeof(t_matrix));
-	out->mx = g_vertex(scl, 0.0, 0.0, 0.0);
-	out->my = g_vertex(0.0, scl, 0.0, 0.0);
-	out->mz = g_vertex(0.0, 0.0, scl, 0.0);
-	out->mw = g_vertex(0.0, 0.0, 0.0, 1.0);
-	return (out);
+	tmp = org;
+	while (tmp.x <= dst.x && tmp.y <= dst.y)
+	{
+		mlx_pixel_put(p->mlx_ptr, p->win_ptr, (int)tmp.x, (int)tmp.y, 0xFFFFFF);
+		tmp.x = tmp.x + 1.0;
+		tmp.y = tmp.y + 1.0;
+	}
 }

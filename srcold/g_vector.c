@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   g_vector.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/04 01:40:34 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+t_vector		g_vector(t_vertex org, t_vertex dst)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
-	t_mtx		*out;
+	t_vector	out;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
-	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
-		i++;
-		k++;
-	}
+	out.org = org;
+	out.vct = g_vertex(dst.x - org.x, dst.y - org.y, dst.z - org.z, 1.0);
 	return (out);
 }

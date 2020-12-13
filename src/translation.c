@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_rot_x.c                                        :+:      :+:    :+:   */
+/*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 04:18:50 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:18:51 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:55:25 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:16:28 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_matrix		*mtx_rot_x(double angle)
+t_mtx			*translation(double vtx[])
 {
-	t_matrix	*out;
-
-	out = mtx_id(1);
-	out->mx->x = 1;
-	out->my->y = cos(angle);
-	out->my->z = -sin(angle);
-	out->mz->y = sin(angle);
-	out->mz->z = cos(angle);
-	return (out);
+	t_mtx		*out;
+	double		trans[16] = {1.0, 0.0, 0.0, vtx[0],
+							0.0, 1.0, 0.0, vtx[1],
+							0.0, 0.0, 1.0, vtx[2],
+							0.0, 0.0, 0.0, 1.0,};
+	out = mtx_cpy(trans, 4, 4);
+	out->name = s_dup("T");
+	return(out);
 }

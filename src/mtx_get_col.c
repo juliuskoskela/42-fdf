@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vector.c                                         :+:      :+:    :+:   */
+/*   mtx_get_col.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 01:40:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/04 23:37:22 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:49:08 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:06:49 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_vector		g_vector(t_vertex org, t_vertex dst)
+double			*mtx_get_col(t_mtx *mtx, size_t col)
 {
-	t_vector	out;
+	size_t		i;
+	size_t		j;
+	double		*out;
 
-	out.org = org;
-	out.vct = g_vertex(dst.x - org.x, dst.y - org.y, dst.z - org.z, 1.0);
+	i = col;
+	j = 0;
+	out = (double *)v_alloc(sizeof(double) * mtx->y);
+	while (i < mtx->x * mtx->y)
+	{
+		out[j] = mtx->this[i];
+		j++;
+		i = i + mtx->x;
+	}
 	return (out);
 }

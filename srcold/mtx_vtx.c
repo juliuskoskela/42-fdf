@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:56:09 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:08:27 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/12 04:20:42 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-double			*mtx_vtx(t_mtx *mtx, double vtx[])
+t_vertex		*mtx_vtx(t_matrix *mtx, t_vertex *vtx)
 {
-	double		*out;
+	t_vertex	*out;
 
-	out = (double *)v_alloc(sizeof(double) * 4);
-	out[0] = (vtx[0] * mtx->this[0]) + (vtx[1] * mtx->this[1]) + (vtx[2] * mtx->this[2]) + (vtx[3] * mtx->this[3]);
-	out[1] = (vtx[0] * mtx->this[4]) + (vtx[1] * mtx->this[5]) + (vtx[2] * mtx->this[6]) + (vtx[3] * mtx->this[7]);
-	out[2] = (vtx[0] * mtx->this[8]) + (vtx[1] * mtx->this[9]) + (vtx[2] * mtx->this[10]) + (vtx[3] * mtx->this[11]);
-	out[3] = (vtx[0] * mtx->this[12]) + (vtx[1] * mtx->this[13]) + (vtx[2] * mtx->this[14]) + (vtx[3] * mtx->this[15]);
+	out = (t_vertex *)v_alloc(sizeof(t_vertex));
+	out->x = (vtx->x * mtx->mx->x) + (vtx->y * mtx->my->x) + (vtx->z * mtx->mz->x) + (vtx->w * mtx->mw->x);
+	out->y = (vtx->x * mtx->mx->y) + (vtx->y * mtx->my->y) + (vtx->z * mtx->mz->y) + (vtx->w * mtx->mw->y);
+	out->z = (vtx->x * mtx->mx->z) + (vtx->y * mtx->my->z) + (vtx->z * mtx->mz->z) + (vtx->w * mtx->mw->z);
+	out->w = (vtx->x * mtx->mx->w) + (vtx->y * mtx->my->w) + (vtx->z * mtx->mz->w) + (vtx->w * mtx->mw->w);
 	return (out);
 }

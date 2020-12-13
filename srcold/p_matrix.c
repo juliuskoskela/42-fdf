@@ -6,11 +6,11 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 04:21:09 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 07:15:59 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
 void			p_matrix(t_matrix *mtx, char *name)
 {

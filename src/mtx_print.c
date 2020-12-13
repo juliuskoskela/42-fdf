@@ -1,38 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   mtx_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:47:51 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:08:12 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+void			mtx_print(t_mtx	*mtx)
 {
 	size_t		i;
 	size_t		j;
-	size_t		k;
-	t_mtx		*out;
+	size_t		r;
 
 	i = 0;
 	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
+	r = 0;
+	printf("%s  ", mtx->name);
+	while (i < mtx->x)
 	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
+		printf("|  c%zu   ", i);
 		i++;
-		k++;
 	}
-	return (out);
+	i = 0;
+	printf("\n---");
+	while (i < mtx->x)
+	{
+		printf("|-------");
+		i++;
+	}
+	i = 0;
+	printf("\n");
+	printf("r%zu ", r);
+	while (i < mtx->x * mtx->y)
+	{
+		if (j == mtx->x)
+		{
+			printf("\n");
+			r++;
+			printf("r%zu ", r);
+			j = 0;
+		}
+		printf("| %5.2f ", mtx->this[i]);
+		i++;
+		j++;
+	}
+	printf("\n");
 }

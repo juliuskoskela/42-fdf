@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_map_scale.c                                      :+:      :+:    :+:   */
+/*   rot_y.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/06 21:38:48 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:53:48 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:54:28 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:09:31 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			g_map_scale(t_vtxarr **map, double scalar)
+t_mtx			*rot_y(double angle)
 {
-	while (*map)
-	{
-		g_vtx_scale((*map)->vtx, scalar);
-		*map = (*map)->next;
-	}
+	t_mtx		*out;
+	double		rot_y[16] = { cos(angle), 0.0, sin(angle), 0.0,
+							0.0, 1.0, 0.0, 0.0,
+							-sin(angle), 0.0, cos(angle), 0.0,
+							0.0, 0.0, 0.0, 1.0, };
+	out = mtx_cpy(rot_y, 4, 4);
+	out->name = s_dup("Y");
+	return(out);
 }

@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   g_mtx_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/08 08:34:18 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/08 08:34:27 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/04 21:03:30 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:04:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../../inc/fdf.h"
 
-t_program		*init(char *input_file)
+t_matrix		g_new_mtx(t_vector x, t_vector y, t_vector z)
 {
-	t_program	*out;
+	t_vector	w;
+	t_matrix	out;
 
-	out = (t_program *)v_alloc(sizeof(t_program));
-	out->name = s_dup("fdf");
-	out->map = input_parse(input_file);
-	out->resx = 1280;
-	out->resy = 720;
-	out->mlx_ptr = mlx_init();
-	out->win_ptr = mlx_new_window(out->mlx_ptr, out->resx, out->resy, "fdf");
+	out.mx = x;
+	out.my = y;
+	out.mz = z;
+	out.mw = w;
 	return (out);
 }
+
+/*
+M | vtcX | vtcY | vtcZ | vtxO
+-----------------------------
+x | 1.00 | 0.00 | 0.00 | 0.00
+y | 0.00 | 1.00 | 0.00 | 0.00
+z | 0.00 | 0.00 | 1.00 | 0.00
+w | 0.00 | 0.00 | 0.00 | 1.00
+*/

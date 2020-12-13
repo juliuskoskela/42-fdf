@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   mtx_get_row.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 17:48:42 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:07:24 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+double			*mtx_get_row(t_mtx *mtx, size_t row)
 {
 	size_t		i;
 	size_t		j;
-	size_t		k;
-	t_mtx		*out;
+	double		*out;
 
-	i = 0;
+	i = row * mtx->x;
 	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
+	out = (double *)v_alloc(sizeof(double) * mtx->x);
+	while (i < (row + 1) * mtx->x)
 	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
+		out[j] = mtx->this[i];
+		j++;
 		i++;
-		k++;
 	}
 	return (out);
 }

@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/12 13:30:43 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/13 19:29:46 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,22 +14,26 @@ NAME	= fdf
 
 # src / obj files
 SRC		=	main.c \
-			g_vertex.c \
-			input_parse.c \
-			g_vtx_scale.c \
-			g_map_scale.c \
-			g_drawline.c \
-			init.c \
-			g_vtxarr_append.c \
-			mtx_id.c \
-			mtx_projection.c \
-			mtx_rot_x.c \
-			mtx_rot_y.c \
-			mtx_rot_z.c \
-			mtx_translation.c \
+			mtx_new.c \
+			mtx_tests.c \
+			identity.c \
+			m_dot.c \
+			m_rad.c \
+			m_dgr.c \
 			mtx_vtx.c \
+			mtx_cpy.c \
+			p_dbl_arr.c \
+			mtx_get_col.c \
+			projection.c \
+			mtx_get_row.c \
 			mtx_multiply.c \
-			p_matrix.c
+			rot_x.c \
+			rot_y.c \
+			rot_z.c \
+			mtx_print.c \
+			input_parse.c \
+			p_map.c \
+			translation.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

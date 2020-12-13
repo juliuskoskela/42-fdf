@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_vtx_scale.c                                      :+:      :+:    :+:   */
+/*   m_dgr.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/04 13:24:50 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/10 11:50:31 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 19:27:12 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 19:27:18 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void		g_vtx_scale(t_vertex *v, double scalar)
+double		m_dgr(double rad)
 {
-	v->x = v->x * scalar;
-	v->y = v->y * scalar;
-	v->z = v->z * scalar;
+	return (rad / (M_PI / 180));
 }

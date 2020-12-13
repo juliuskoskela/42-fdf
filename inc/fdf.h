@@ -8,59 +8,54 @@
 # include "../libft/inc/libft.h"
 # include "../inc/mlx.h"
 
-typedef struct		s_vertex
+typedef struct	s_mtx
 {
-	double			x;
-	double			y;
-	double			z;
-	double			w;
-}					t_vertex;
-
-typedef struct		s_vtxarr
-{
-	t_vertex		*vtx;
-	struct s_vtxarr	*next;
-	struct s_vtxarr	*prev;
-}					t_vtxarr;
-
-typedef struct		s_matrix
-{
-	int				fov;
-	t_vertex		*mx;
-	t_vertex		*my;
-	t_vertex		*mz;
-	t_vertex		*mw;
-}					t_matrix;
+	size_t		x;
+	size_t		y;
+	double		*this;
+	char		*name;
+}				t_mtx;
 
 typedef struct		s_program
 {
 	char			*name;
-	t_vtxarr		*map;
+	t_dlist			*map;
 	int				resx;
 	int				resy;
+	double			ratio;
+	double			near;
+	double			far;
+	double			scale;
+	double			fov;
+	double			angle_x;
+	double			angle_y;
+	double			angle_z;
+	t_mtx			*transformation_matrix;
 	void			*mlx_ptr;
 	void			*win_ptr;
 }					t_program;
 
-void			g_vtxarr_append(t_vtxarr **ref, t_vertex *new);
-void			g_vtx_scale(t_vertex *v, double scalar);
-void			g_map_scale(t_vtxarr **map, double scalar);
-t_vtxarr		*input_parse(char *input_file);
-void			g_drawline(t_program *p, t_vertex org, t_vertex dst);
-t_program		*init(char *input_file);
-t_vertex		*g_vertex(double x, double y, double z, double w);
+double			m_dot(double *a, double *b, size_t size);
+double			m_rad(double dgr);
+double			m_dgr(double rad);
+t_mtx			*mtx_cpy(double arr[], size_t rows, size_t cols);
+double			*mtx_get_col(t_mtx *mtx, size_t col);
+double			*mtx_get_row(t_mtx *mtx, size_t row);
+t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b);
+t_mtx			*mtx_new(char *name, size_t rows, size_t cols);
+void			mtx_print(t_mtx	*mtx);
+double			*mtx_vtx(t_mtx *mtx, double vtx[]);
+void			p_dbl_arr(double *arr, size_t size);
+t_mtx			*identity(size_t scale);
+t_mtx			*translation(double vtx[]);
+t_mtx			*projection(double ratio, double near, double far, double fov);
+t_mtx			*rot_x(double angle);
+t_mtx			*rot_y(double angle);
+t_mtx			*rot_z(double angle);
+int				mtx_tests(void);
+int				main(int argc, char **argv);
+t_dlist			*input_parse(char *input_file);
+void			p_map(t_dlist **map);
 
-/*
-** Matrix
-*/
-t_matrix		*mtx_id(double scl);
-t_matrix		*mtx_projection(double fov, double ratio, double near, double far);
-t_matrix		*mtx_rot_x(double angle);
-t_matrix		*mtx_rot_y(double angle);
-t_matrix		*mtx_rot_z(double angle);
-t_matrix		*mtx_translation(t_vertex *vtx);
-t_vertex		mtx_vtx(t_matrix *mtx, t_vertex vtx);
-void			p_matrix(t_matrix *mtx, char *name);
-t_matrix		*mtx_multiply(t_matrix *a, t_matrix *b);
 
 #endif

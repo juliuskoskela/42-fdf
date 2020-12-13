@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_rot_y.c                                        :+:      :+:    :+:   */
+/*   m_rad.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 04:19:13 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/12 04:19:14 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 19:19:53 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 19:30:10 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_matrix		*mtx_rot_y(double angle)
+double		m_rad(double dgr)
 {
-	t_matrix	*out;
-
-	out = mtx_id(1);
-	out->mx->x = cos(angle);
-	out->mz->x = sin(angle);
-	out->my->y = 1;
-	out->mx->z = -sin(angle);
-	out->mz->z = cos(angle);
-	return (out);
+	return (dgr * (M_PI / 180));
 }

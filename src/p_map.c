@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_multiply.c                                     :+:      :+:    :+:   */
+/*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:51:02 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:22:08 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/13 18:36:05 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/13 18:44:55 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b)
+void			p_map(t_dlist **map)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
-	t_mtx		*out;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("M", a->x, b->y);
-	while (i < a->x * a->y)
+	double		*tmp;
+	if (*map)
 	{
-		if (k == a->x)
-		{
-			k = 0;
-			j++;
-		}
-		out->this[i] = m_dot(mtx_get_row(a, j), mtx_get_col(b, k), a->x);
-		i++;
-		k++;
+		tmp = (*map)->content;
+		printf("v.x: %f v.y: %f v.z: %f v.w: %f\n", tmp[0], tmp[1], tmp[2], tmp[3]);
+		*map = (*map)->next;
+		p_map(map);
 	}
-	return (out);
 }
