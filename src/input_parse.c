@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/14 14:24:39 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/14 16:15:29 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_dlist		*input_parse(char *input_file)
+t_dlist			*input_parse(t_program *fdf, char *input_file)
 {
 	int			fd;
 	int			row;
@@ -58,9 +58,11 @@ t_dlist		*input_parse(char *input_file)
 		dl_putlast(&out, vtx_new(row, c_atoi(tmp) * sign, col, 1.0));
 		sign = 1;
 		i = 0;
+		fdf->map_rows = row;
 		row = 0;
 		col++;
 	}
+	fdf->map_cols = col;
 	close(fd);
 	return (out);
 }

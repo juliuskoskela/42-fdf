@@ -30,6 +30,8 @@ typedef struct		s_program
 	double			angle_x;
 	double			angle_y;
 	double			angle_z;
+	size_t			map_rows;
+	size_t			map_cols;
 	t_mtx			*transformation_matrix;
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -55,8 +57,9 @@ t_mtx			*rot_y(double angle);
 t_mtx			*rot_z(double angle);
 int				mtx_tests(void);
 int				main(int argc, char **argv);
-t_dlist			*input_parse(char *input_file);
+t_dlist			*input_parse(t_program *fdf, char *input_file);
 void			p_map(t_dlist **map);
+t_mtx			*mtx_transpose(t_mtx *in);
 
 
 #endif

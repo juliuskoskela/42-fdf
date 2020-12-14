@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:18:24 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 19:30:55 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:33:38 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int				mtx_tests(void)
 	t_mtx		*t;
 	t_mtx		*s;
 	t_mtx		*m;
+	t_mtx		*tr;
 	double		ratio = 1.333;
 	double		near = 1.0;
 	double		far = -50.0;
@@ -40,6 +41,7 @@ int				mtx_tests(void)
 	m = mtx_multiply(t, x);
 	m = mtx_multiply(m, y);
 	m = mtx_multiply(m, s);
+	tr = mtx_transpose(m);
 	double		*transformed_vtx = mtx_vtx(m, vtx);
 	printf("\n");
 	mtx_print(x);
@@ -55,6 +57,8 @@ int				mtx_tests(void)
 	mtx_print(s);
 	printf("\n");
 	mtx_print(m);
+	printf("\n");
+	mtx_print(tr);
 	printf("\nTransformed vertex: ");
 	p_dbl_arr(transformed_vtx, 4);
 	printf("\nTest dgr->rad: %f", m_rad(60));

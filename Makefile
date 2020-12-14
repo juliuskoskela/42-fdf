@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/14 14:24:26 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/14 17:31:55 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC		=	main.c \
 			input_parse.c \
 			p_map.c \
 			vtx_new.c \
+			mtx_transpose.c \
 			translation.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))

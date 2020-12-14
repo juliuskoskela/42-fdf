@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_map.c                                            :+:      :+:    :+:   */
+/*   mtx_transpose.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 18:36:05 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/14 16:43:25 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/14 17:31:23 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/14 17:34:46 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			p_map(t_dlist **map)
+t_mtx			*mtx_transpose(t_mtx *in)
 {
-	t_dlist		*pos;
-	double		*tmp;
+	t_mtx		*out;
+	double		*row;
+	size_t		i;
+	size_t		j;
+	size_t		k;
 
-	pos = *map;
-	while (pos)
+	i = 0;
+	j = 0;
+	k = 0;
+	out = mtx_new("Tr", in->y, in->x);
+	while (i < out->y)
 	{
-		tmp = pos->content;
-		printf("v.x: %f v.y: %f v.z: %f v.w: %f\n", tmp[0], tmp[1], tmp[2], tmp[3]);
-		pos = pos->next;
+		row = mtx_get_col(in, i);
+		while (j < out->x)
+		{
+			out->this[k] = row[j];
+			j++;
+			k++;
+		}
+		j = 0;
+		i++;
 	}
+	return (out);
 }
