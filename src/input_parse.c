@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 20:52:27 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/14 14:24:39 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_dlist		*input_parse(char *input_file)
 	char		tmp[10];
 	char		*line;
 	t_dlist		*out;
-	double		*vtx;
 
 	fd = open(input_file, O_RDONLY);
 	col = 0;
@@ -49,24 +48,14 @@ t_dlist		*input_parse(char *input_file)
 			}
 			else if (line[i] == ' ')
 			{
-				vtx = (double *)v_alloc(sizeof(double) * 4);
-				vtx[0] = row;
-				vtx[1] = c_atoi(tmp) * sign;
-				vtx[2] = col;
-				vtx[3] = 1.0;
-				dl_putlast(&out, vtx);
+				dl_putlast(&out, vtx_new(row, c_atoi(tmp) * sign, col, 1.0));
 				while (line[i] == ' ')
 					i++;
 				row++;
 				sign = 1;
 			}
 		}
-		vtx = (double *)v_alloc(sizeof(double) * 4);
-		vtx[0] = row;
-		vtx[1] = c_atoi(tmp) * sign;
-		vtx[2] = col;
-		vtx[3] = 1.0;
-		dl_putlast(&out, vtx);
+		dl_putlast(&out, vtx_new(row, c_atoi(tmp) * sign, col, 1.0));
 		sign = 1;
 		i = 0;
 		row = 0;

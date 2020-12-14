@@ -38,6 +38,7 @@ typedef struct		s_program
 double			m_dot(double *a, double *b, size_t size);
 double			m_rad(double dgr);
 double			m_dgr(double rad);
+double			*vtx_new(double x, double y, double z, double w);
 t_mtx			*mtx_cpy(double arr[], size_t rows, size_t cols);
 double			*mtx_get_col(t_mtx *mtx, size_t col);
 double			*mtx_get_row(t_mtx *mtx, size_t row);
