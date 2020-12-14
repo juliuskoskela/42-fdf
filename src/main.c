@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 20:37:12 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/13 20:59:07 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_mtx			*transformation_matrix(t_program *fdf)
 	t_mtx		*t;
 	t_mtx		*s;
 	t_mtx		*out;
-	double		translation_vtx[4] = { 20.0, 20.0, 0.0, 1.0};
+	double		translation_vtx[4] = { 0.0, 0.0, 0.0, 1.0};
 	x = rot_x(fdf->angle_x);
 	y = rot_y(fdf->angle_y);
 	z = rot_z(fdf->angle_z);
