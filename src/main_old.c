@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/14 23:42:19 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/15 03:43:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ double			*vct_opposite(double *vct)
 	return (out);
 }
 
-t_mtx			*view_mtx(double *origin, double o_x, double o_y, double o_z)
-{
-	t_mtx		*out;
+// t_mtx			*view_mtx(double *origin, double o_x, double o_y, double o_z)
+// {
+// 	t_mtx		*out;
 
-	out = rotation(o_x, o_y, o_z);
-	out = mtx_multiply(out, mtx_transpose(translation(vct_opposite(origin))));
-	return (out);
-}
+// 	out = rotation(o_x, o_y, o_z);
+// 	out = mtx_multiply(out, mtx_transpose(translation(vct_opposite(origin))));
+// 	return (out);
+// }
 
 t_mtx			*transformation_matrix(t_program *fdf)
 {

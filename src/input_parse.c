@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 01:34:34 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/15 03:50:53 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_dlist			*input_parse(char *input_file)
+t_dlist		*input_parse(char *input_file)
 {
 	int			fd;
 	int			row;

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translation.c                                      :+:      :+:    :+:   */
+/*   construct_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:55:25 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 04:22:27 by jkoskela         ###   ########.fr       */
+/*   Created: 2020/12/15 02:52:01 by jkoskela          #+#    #+#             */
+/*   Updated: 2020/12/15 05:40:06 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_mtx			*translation(double *vtx)
+t_world			*construct_world()
 {
-	t_mtx		*out;
-	double		trans[16] = {1.0, 0.0, 0.0, vtx[0],
-							0.0, 1.0, 0.0, vtx[1],
-							0.0, 0.0, 1.0, vtx[2],
-							0.0, 0.0, 0.0, 1.0,};
-	out = mtx_cpy(trans, 4, 4);
-	out->name = s_dup("T");
-	return(out);
+	t_world		*out;
+
+	out = (t_world *)v_alloc(sizeof(t_world));
+	out->obj_cnt = 0.0;
+	out->resy = 0.0;
+	out->resy = 0.0;
+	out->camera = NULL;
+	out->world_buffer = NULL;
+	out->transform = &transform;
+	return (out);
 }

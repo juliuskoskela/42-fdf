@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/14 17:31:55 by jkoskela         ###   ########.fr        #
+#    Updated: 2020/12/15 03:08:21 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,16 @@ SRC		=	main.c \
 			p_map.c \
 			vtx_new.c \
 			mtx_transpose.c \
+			rotation.c \
+			vct_magnitude.c \
+			vct_opposite.c \
+			view_mtx.c \
+			object_mtx.c \
+			transform.c \
+			construct_camera.c \
+			construct_object.c \
+			construct_world.c \
+			init.c \
 			translation.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
