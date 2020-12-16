@@ -6,29 +6,11 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 05:59:16 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 06:19:17 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/15 18:33:21 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-
-void			render(t_program *fdf)
-{
-	t_dlist		*tmp;
-	double		*org;
-	void		*mlx_ptr = mlx_init();
-	void		*win_ptr = mlx_new_window(mlx_ptr, fdf->world->resx, fdf->world->resy, fdf->name);
-
-	tmp = fdf->world->world_buffer[0]->object_buffer;
-	while (tmp)
-	{
-		org = tmp->content;
-		mlx_pixel_put(mlx_ptr, win_ptr, (int)org[0], (int)org[1], 0xFFFFFF - (org[4]));
-		tmp = tmp->next;
-	}
-	mlx_key_hook(p.win_ptr, key_callback, &p);
-	mlx_loop(mlx_ptr);
-}
 
 int				main(int argc, char **argv)
 {
@@ -37,7 +19,9 @@ int				main(int argc, char **argv)
 
 	if (argc != 2)
 		argc = 2;
-	fdf = construct_program();
+	fdf = construct_program(1280, 720);
+	fdf->mlx_ptr = mlx_init();
+	fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, fdf->resx, fdf->resy, fdf->name);
 
 	obj_1 = construct_object(input_parse(argv[1]));
 	obj_1->scalar = 10.0;
@@ -64,12 +48,10 @@ int				main(int argc, char **argv)
 	fdf->world->camera->view = fdf->world->camera->view_mtx(fdf->world->camera->pos, fdf->world->camera->rot);
 	fdf->world->camera->proj = fdf->world->camera->projection(fdf->world->camera->ratio, fdf->world->camera->near, fdf->world->camera->far, fdf->world->camera->fov);
 	fdf->world->camera->cmp = mtx_multiply(fdf->world->camera->proj, fdf->world->camera->view);
-	mtx_print(fdf->world->camera->view);
-	mtx_print(fdf->world->camera->proj);
-	mtx_print(fdf->world->camera->cmp);
 
 	fdf->world->transform(fdf->world->world_buffer[0]->object_buffer, fdf->world->camera->cmp);
-	p_map(&fdf->world->world_buffer[0]->object_buffer);
 	render(fdf);
+	mlx_key_hook(fdf->win_ptr, key_callback, fdf);
+	mlx_loop(fdf->mlx_ptr);
 	return(0);
 }

@@ -6,47 +6,55 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 17:25:11 by esukava           #+#    #+#             */
-/*   Updated: 2020/12/15 06:30:18 by jkoskela         ###   ########.fr       */
+/*   Updated: 2020/12/15 18:34:23 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void		call_sec(t_program *p)
-{
-	mlx_clear_window(p->mlx_ptr, p->win_ptr);
-	draw_sec(p);
-}
-
-void		call_isom(t_program *p)
-{
-	mlx_clear_window(p->mlx_ptr, p->win_ptr);
-	draw_isom(p);
-}
-
 int			key_callback(int keycode, t_program *p)
 {
-	if (keycode == 1 || keycode == 7)
-		scale(keycode, p);
-	if (keycode == 0 || keycode == 6)
-		zoom(keycode, p);
+	if (!p || !p->mlx_ptr || !p->win_ptr || keycode < 0)
+		error("Error in key callback params");
 	// Left
 	if (keycode == 123)
-	{}
+	{
+		p->world->camera->rot[0] += -1;
+		p->world->transform(p->world->world_buffer[0]->object_buffer, \
+		p->world->camera->view_mtx(p->world->camera->pos, \
+		p->world->camera->rot));
+	}
 	// Right
-	if (keycode == 124)
-	{}
+	else if (keycode == 124)
+	{
+		p->world->camera->rot[0] += 1;
+		p->world->transform(p->world->world_buffer[0]->object_buffer, \
+		p->world->camera->view_mtx(p->world->camera->pos, \
+		p->world->camera->rot));
+	}
 	// Down
-	if (keycode == 125)
-	{}
+	else if (keycode == 125)
+	{
+		p->world->camera->rot[1] += -1;
+		p->world->transform(p->world->world_buffer[0]->object_buffer, \
+		p->world->camera->view_mtx(p->world->camera->pos, \
+		p->world->camera->rot));
+	}
 	// Up
-	if (keycode == 126)
-	{}
+	else if (keycode == 126)
+	{
+		p->world->camera->rot[1] += 1;
+		p->world->transform(p->world->world_buffer[0]->object_buffer, \
+		p->world->camera->view_mtx(p->world->camera->pos, \
+		p->world->camera->rot));
+	}
 	// Exit
-	if (keycode == 53)
+	else if (keycode == 53)
 	{
 		mlx_destroy_window(p->mlx_ptr, p->win_ptr);
 		exit(1);
 	}
+	mlx_clear_window(p->mlx_ptr, p->win_ptr);
+	render(p);
 	return (0);
 }
