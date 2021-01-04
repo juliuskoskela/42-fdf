@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 03:50:53 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/04 05:30:43 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_dlist		*input_parse(char *input_file)
 	int			fd;
 	int			row;
 	int			col;
+	int			cnt;
 	int			i;
 	int			j;
 	int			sign;
@@ -30,6 +31,7 @@ t_dlist		*input_parse(char *input_file)
 	i = 0;
 	j = 0;
 	sign = 1;
+	cnt = 0;
 	out = NULL;
 	while (fd_readline(fd, &line) > 0)
 	{
@@ -48,18 +50,20 @@ t_dlist		*input_parse(char *input_file)
 			}
 			else if (line[i] == ' ')
 			{
-				dl_putlast(&out, vtx_new(row, (c_atoi(tmp) * sign), col, 1.0, c_atoi(tmp) + 100));
+				dl_putlast(&out, g_vtx(row, (c_atof(tmp) * sign), col, cnt));
 				while (line[i] == ' ')
 					i++;
 				row++;
+				cnt++;
 				sign = 1;
 			}
 		}
-		dl_putlast(&out, vtx_new(row, c_atoi(tmp) * sign, col, 1.0, c_atoi(tmp) + 100));
+		dl_putlast(&out, g_vtx(row, c_atof(tmp) * sign, col, cnt));
 		sign = 1;
 		i = 0;
 		row = 0;
 		col++;
+		cnt++;
 	}
 	close(fd);
 	return (out);

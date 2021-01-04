@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_dbl_arr.c                                        :+:      :+:    :+:   */
+/*   comp_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:52:14 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:08:44 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/03 23:49:01 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/04 05:30:14 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			p_dbl_arr(double *arr, size_t size)
+void			comp_camera(t_camera **cam, int verbose)
 {
-	size_t		i;
-
-	i = 0;
-	while (i < size)
-	{
-		printf("%.1f ", arr[i]);
-		i++;
-	}
-	printf("\n");
+	view_mtx(*cam, verbose);
+	g_proj((*cam)->proj_mtx, (*cam)->fov, (*cam)->ratio, (*cam)->near, (*cam)->far);
+	mtx_multiply((*cam)->comp, (*cam)->view_mtx, (*cam)->proj_mtx);
+	if (verbose == 1)
+		printf("\nCamera matrix composited!\n\n");
 }

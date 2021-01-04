@@ -1,6 +1,8 @@
 #ifndef FDF_H
 # define FDF_H
-
+# define MAX_BUFF 1000
+# define RESX 2560
+# define RESY 1440
 # include <string.h>
 # include <math.h>
 # include <stdio.h>
@@ -8,101 +10,80 @@
 # include "../libft/inc/libft.h"
 # include "../inc/mlx.h"
 
-typedef struct		s_mtx
-{
-	size_t			x;
-	size_t			y;
-	double			*this;
-	char			*name;
-}					t_mtx;
-
-typedef struct		s_object
-{
-	double			*pos;
-	double			*rot;
-	double			scalar;
-	t_mtx			*xyz;
-	t_mtx			*mov;
-	t_mtx			*scl;
-	t_mtx			*cmp;
-	t_mtx			*(*object_cmp)(t_mtx *, t_mtx *, t_mtx *);
-	t_mtx			*(*rotate)(double *);
-	t_mtx			*(*move)(double *);
-	t_mtx			*(*scale)(size_t);
-	void			(*transform)(t_dlist *, t_mtx *);
-	t_dlist			*object_buffer;
-}					t_object;
-
 typedef struct		s_camera
 {
-	double			*pos;
-	double			*rot;
+	double			width;
+	double			height;
 	double			ratio;
 	double			near;
 	double			far;
 	double			fov;
-	t_mtx			*proj;
-	t_mtx			*view;
-	t_mtx			*cmp;
-	t_mtx			*(*view_mtx)(double *, double *);
-	t_mtx			*(*projection)(double, double, double, double);
+	t_mtx			*pos;
+	t_mtx			*ori;
+	t_mtx			*ovct;
+	t_mtx			*tt;
+	t_mtx			*tr;
+	t_mtx			**xyz;
+	t_mtx			*rot;
+	t_mtx			*view_mtx;
+	t_mtx			*proj_mtx;
+	t_mtx			*comp;
 }					t_camera;
+
+typedef struct		s_object
+{
+	char			*file;
+	double			g_scale;
+	size_t			vtx_cnt;
+	t_mtx			*pos;
+	t_mtx			*ori;
+	t_mtx			**xyz;
+	t_mtx			*rot;
+	t_mtx			*tt;
+	t_mtx			*scl;
+	t_dlist			*object_buff;
+	t_mtx			*comp;
+}					t_object;
 
 typedef struct		s_world
 {
-	double			resx;
-	double			resy;
-	size_t			obj_cnt;
-	t_object		**world_buffer;
-	t_camera		*camera;
-	void			(*transform)(t_dlist *, t_mtx *);
-}					t_world;
-
-typedef struct		s_program
-{
-	double			resx;
-	double			resy;
 	char			*name;
-	t_world			*world;
+	int				resx;
+	int				resy;
 	void			*mlx_ptr;
 	void			*win_ptr;
-}					t_program;
+	size_t			obj_cnt;
+	size_t			buffsize;
+	t_camera		**cam_arr;
+	t_object		**obj_arr;
+	t_dlist			*wrld_prebuff;
+	t_mtx			**wrld_buff;
+	t_mtx			*comp;
+}					t_world;
 
-double			m_dot(double *a, double *b, size_t size);
-double			m_rad(double dgr);
-double			m_dgr(double rad);
-double			vct_magnitude(double *vct);
-double			*vct_opposite(double *vct);
-double			*vtx_new(double x, double y, double z, double w, double c);
-double			*mtx_get_row(t_mtx *mtx, size_t row);
-double			*mtx_get_col(t_mtx *mtx, size_t col);
-double			*mtx_vtx(t_mtx *mtx, double vtx[]);
-void			mtx_print(t_mtx	*mtx);
-void			p_dbl_arr(double *arr, size_t size);
-void			p_map(t_dlist **map);
-int				mtx_tests(void);
-t_mtx			*mtx_cpy(double arr[], size_t rows, size_t cols);
-t_mtx			*mtx_multiply(t_mtx *a, t_mtx *b);
-t_mtx			*mtx_new(char *name, size_t rows, size_t cols);
-t_mtx			*identity(size_t scale);
-t_mtx			*translation(double *vtx);
-t_mtx			*projection(double ratio, double near, double far, double fov);
-t_mtx			*rot_x(double angle);
-t_mtx			*rot_y(double angle);
-t_mtx			*rot_z(double angle);
+typedef struct		s_tri
+{
+	t_mtx			*v1;
+	t_mtx			*v2;
+	t_mtx			*v3;
+}					t_tri;
+
+t_world			*construct_world(int verbose);
+t_camera		*construct_camera(int verbose);
+t_object		*construct_object(char *file, int verbose);
+void			destruct_world(t_world *wrld, int verbose);
+void			destruct_camera(t_camera *cam, int verbose);
+void			destruct_object(t_object *obj, int verbose);
+void			set_world(t_world **wrld, int verbose);
+void			set_camera(t_camera **cam, int verbose);
+void			set_object(t_object **obj, int verbose);
+void			process_world_buffer(t_world **wrld, int verbose);
+void			comp_object(t_object **obj, int verbose);
+void			comp_camera(t_camera **cam, int verbose);
+void			render(t_world **wrld, t_mtx **buff, size_t buffsize);
+void			printf_buff(t_dlist *buff);
 t_dlist			*input_parse(char *input_file);
-t_mtx			*mtx_transpose(t_mtx *in);
-t_mtx			*rotation(double *rot);
-t_mtx			*view_mtx(double *pos, double *rot);
-t_mtx			*object_mtx(t_mtx *rot, t_mtx *scale, t_mtx *move);
-t_camera		*construct_camera();
-t_world			*construct_world();
-t_object		*construct_object(t_dlist *object_buffer);
-t_program		*construct_program(double resx, double resy);
-void			transform(t_dlist *verteces, t_mtx *object_mtx);
-void			render(t_program *fdf);
-int				key_callback(int keycode, t_program *p);
+void			view_mtx(t_camera *cam, int verbose);
 int				main(int argc, char **argv);
-
 
 #endif

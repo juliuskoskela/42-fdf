@@ -5,23 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 06:58:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 18:30:19 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/04 03:40:58 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			render(t_program *fdf)
+void			render(t_world **wrld, t_mtx **buff, size_t buffsize)
 {
-	t_dlist		*tmp;
-	double		*org;
+	size_t		i;
+	int			x;
+	int			y;
 
-	tmp = fdf->world->world_buffer[0]->object_buffer;
-	while (tmp)
+	i = 0;
+	while (i < buffsize)
 	{
-		org = tmp->content;
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, (int)org[0], (int)org[1], 0xFFFFFF - (org[4]));
-		tmp = tmp->next;
+		x = (int)buff[i]->this[0];
+		y = (int)buff[i]->this[1];
+		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, x, y, 0xFFFFFF);
+		i++;
 	}
 }

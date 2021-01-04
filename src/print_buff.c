@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_opposite.c                                     :+:      :+:    :+:   */
+/*   print_buff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 02:46:49 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 02:46:50 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/03 23:58:30 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/03 23:58:33 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-double			*vct_opposite(double *vct)
+void			printf_buff(t_dlist *buff)
 {
-	double		*out;
-	double		mag;
+	t_dlist		*tmp;
+	t_mtx		*cast;
 
-	mag = -1 * vct_magnitude(vct);
-	out = vtx_new(vct[0] / mag, vct[1] / mag, vct[2] / mag, 1.0, 0);
-	return (out);
+	tmp = buff;
+	while (tmp)
+	{
+		cast = tmp->content;
+		mtx_print(cast);
+		tmp = tmp->next;
+	}
 }

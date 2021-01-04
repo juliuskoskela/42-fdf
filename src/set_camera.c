@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_get_col.c                                      :+:      :+:    :+:   */
+/*   set_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 17:49:08 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/13 18:06:49 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/03 23:50:41 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/04 01:16:41 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-double			*mtx_get_col(t_mtx *mtx, size_t col)
+void			set_camera(t_camera **cam, int verbose)
 {
-	size_t		i;
-	size_t		j;
-	double		*out;
-
-	i = col;
-	j = 0;
-	out = (double *)v_alloc(sizeof(double) * mtx->y);
-	while (i < mtx->x * mtx->y)
-	{
-		out[j] = mtx->this[i];
-		j++;
-		i = i + mtx->x;
-	}
-	return (out);
+	(*cam)->width = 640;
+	(*cam)->height = 480;
+	(*cam)->ratio = (*cam)->width / (*cam)->height;
+	(*cam)->near = 1.0;
+	(*cam)->far = 100.0;
+	(*cam)->fov = 60;
+	(*cam)->pos->this[0] = 10.0;
+	(*cam)->pos->this[1] = 10.0;
+	(*cam)->pos->this[2] = 20.0;
+	(*cam)->ori->this[0] = 1;
+	(*cam)->ori->this[1] = 1;
+	(*cam)->ori->this[2] = 1;
+	if (verbose == 1)
+		printf("\nCamera set!\n\n");
 }

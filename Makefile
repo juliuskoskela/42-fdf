@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2020/12/15 07:03:07 by jkoskela         ###   ########.fr        #
+#    Updated: 2021/01/04 05:56:16 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,40 +14,23 @@ NAME	= fdf
 
 # src / obj files
 SRC		=	main.c \
-			mtx_new.c \
-			mtx_tests.c \
-			identity.c \
-			m_dot.c \
-			m_rad.c \
-			m_dgr.c \
-			mtx_vtx.c \
-			mtx_cpy.c \
-			p_dbl_arr.c \
-			mtx_get_col.c \
-			projection.c \
-			mtx_get_row.c \
-			mtx_multiply.c \
-			rot_x.c \
-			rot_y.c \
-			rot_z.c \
-			mtx_print.c \
-			input_parse.c \
-			p_map.c \
-			vtx_new.c \
-			mtx_transpose.c \
-			rotation.c \
-			vct_magnitude.c \
-			vct_opposite.c \
-			view_mtx.c \
-			object_mtx.c \
-			transform.c \
+render.c \
 			construct_camera.c \
 			construct_object.c \
 			construct_world.c \
-			construct_program.c \
-			key_callback.c \
-			render.c \
-			translation.c
+			destruct_camera.c \
+			destruct_object.c \
+			destruct_world.c \
+			set_camera.c \
+			set_object.c \
+			set_world.c \
+			comp_object.c \
+			comp_camera.c \
+			process_world_buffer.c \
+			print_buff.c \
+			proj_mtx.c \
+			view_mtx.c \
+			input_parse.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

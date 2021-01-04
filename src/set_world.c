@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   construct_program.c                                :+:      :+:    :+:   */
+/*   set_world.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 02:53:38 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/15 17:06:10 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/03 23:52:38 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/04 05:50:45 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_program			*construct_program(double resx, double resy)
+void			set_world(t_world **wrld, int verbose)
 {
-	t_program		*out;
-
-	out = (t_program *)v_alloc(sizeof(t_program));
-	out->name = s_dup("fdf");
-	out->resx = resx;
-	out->resy = resy;
-	out->world = construct_world();
-	out->world->camera = construct_camera();
-	return (out);
+	(*wrld)->name = s_dup("fdf");
+	(*wrld)->resx = RESX;
+	(*wrld)->resy = RESY;
+	(*wrld)->mlx_ptr = mlx_init();
+	(*wrld)->win_ptr = mlx_new_window((*wrld)->mlx_ptr, RESX, RESY, "fdf");
+	if (verbose == 1)
+		printf("\nWorld set!\n\n");
 }

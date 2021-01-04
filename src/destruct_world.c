@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mtx_transpose.c                                    :+:      :+:    :+:   */
+/*   destruct_world.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 17:31:23 by jkoskela          #+#    #+#             */
-/*   Updated: 2020/12/14 17:34:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/01 19:52:42 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/02 01:19:52 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../inc/fdf.h"
 
-t_mtx			*mtx_transpose(t_mtx *in)
+void			destruct_world(t_world *wrld, int verbose)
 {
-	t_mtx		*out;
-	double		*row;
-	size_t		i;
-	size_t		j;
-	size_t		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	out = mtx_new("Tr", in->y, in->x);
-	while (i < out->y)
-	{
-		row = mtx_get_col(in, i);
-		while (j < out->x)
-		{
-			out->this[k] = row[j];
-			j++;
-			k++;
-		}
-		j = 0;
-		i++;
-	}
-	return (out);
+	mtx_free(wrld->comp);
+	free(wrld);
+	if (verbose == 1)
+		printf("\nWorld destructed!\n\n");
 }
