@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:52:26 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/02 01:19:01 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/05 05:16:40 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			destruct_object(t_object *obj, int verbose)
 	mtx_free(obj->xyz[2]);
 	mtx_free(obj->rot);
 	mtx_free(obj->tt);
-	free_obj_buff(obj->object_buff);
+	free_obj_buff(obj->obj_buff);
 	free(obj->ori);
 	free(obj->pos);
 	free(obj->pos);

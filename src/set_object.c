@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:51:41 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 05:21:49 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/05 07:30:08 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void			set_object(t_object **obj, int verbose)
 {
 
-	(*obj)->pos->this[0] = 0.0;
-	(*obj)->pos->this[1] = 0.0;
-	(*obj)->pos->this[2] = 0.0;
-	(*obj)->ori->this[0] = 20;
-	(*obj)->ori->this[1] = 20;
-	(*obj)->ori->this[2] = 20;
-	(*obj)->g_scale = 10;
-	(*obj)->object_buff = input_parse((*obj)->file);
-	(*obj)->vtx_cnt = dl_len((*obj)->object_buff);
+	(*obj)->pos->this[0] = RESX / 2;
+	(*obj)->pos->this[1] = RESY / 3;
+	(*obj)->pos->this[2] = 100.0;
+	(*obj)->ori->this[0] = 0;
+	(*obj)->ori->this[1] = 0;
+	(*obj)->ori->this[2] = 0;
+	(*obj)->g_scale = 20;
+	(*obj)->obj_buff = input_parse((*obj)->file);
+	(*obj)->vtx_cnt = dl_len((*obj)->obj_buff);
 	if (verbose == 1)
 		printf("\nObject set!\n\n");
 }

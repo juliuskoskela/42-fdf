@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2021/01/04 05:56:16 by jkoskela         ###   ########.fr        #
+#    Updated: 2021/01/05 05:18:28 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,8 @@ render.c \
 			set_world.c \
 			comp_object.c \
 			comp_camera.c \
-			process_world_buffer.c \
+			proc_buff.c \
 			print_buff.c \
-			proj_mtx.c \
 			view_mtx.c \
 			input_parse.c \
 

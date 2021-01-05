@@ -6,65 +6,52 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 05:30:43 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/05 02:20:45 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_dlist		*input_parse(char *input_file)
+t_dlist			*input_parse(char *input_file)
 {
-	int			fd;
-	int			row;
-	int			col;
-	int			cnt;
-	int			i;
-	int			j;
-	int			sign;
-	char		tmp[10];
-	char		*line;
-	t_dlist		*out;
+	t_parse		p;
 
-	fd = open(input_file, O_RDONLY);
-	col = 0;
-	row = 0;
-	i = 0;
-	j = 0;
-	sign = 1;
-	cnt = 0;
-	out = NULL;
-	while (fd_readline(fd, &line) > 0)
+	v_bzero(&p, sizeof(t_parse));
+	p.fd = open(input_file, O_RDONLY);
+	p.sign = 1;
+	p.tmp = (char *)v_alloc(sizeof(char) * 10);
+	while (fd_readline(p.fd, &p.line) > 0)
 	{
-		while (line[i])
+		while (p.line[p.i])
 		{
-			if (line[i] == '-')
+			if (p.line[p.i] == '-')
 			{
-				sign = -1;
-				i++;
+				p.sign = -1;
+				p.i++;
 			}
-			else if (is_digit(line[i]))
+			else if (is_digit(p.line[p.i]))
 			{
-				while (is_digit(line[i]))
-					tmp[j++] = line[i++];
-				j = 0;
+				while (is_digit(p.line[p.i]))
+					p.tmp[p.j++] = p.line[p.i++];
+				p.j = 0;
 			}
-			else if (line[i] == ' ')
+			else if (p.line[p.i] == ' ')
 			{
-				dl_putlast(&out, g_vtx(row, (c_atof(tmp) * sign), col, cnt));
-				while (line[i] == ' ')
-					i++;
-				row++;
-				cnt++;
-				sign = 1;
+				dl_putlast(&p.out, g_vtx(p.row, (c_atof(p.tmp) * p.sign), p.col, p.cnt));
+				while (p.line[p.i] == ' ')
+					p.i++;
+				p.row++;
+				p.cnt++;
+				p.sign = 1;
 			}
 		}
-		dl_putlast(&out, g_vtx(row, c_atof(tmp) * sign, col, cnt));
-		sign = 1;
-		i = 0;
-		row = 0;
-		col++;
-		cnt++;
+		dl_putlast(&p.out, g_vtx(p.row, c_atof(p.tmp) * p.sign, p.col, p.cnt));
+		p.sign = 1;
+		p.i = 0;
+		p.row = 0;
+		p.col++;
+		p.cnt++;
 	}
-	close(fd);
-	return (out);
+	close(p.fd);
+	return (p.out);
 }

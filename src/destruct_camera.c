@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:47:51 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/02 01:18:48 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/04 19:35:34 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			destruct_camera(t_camera *cam, int verbose)
 	mtx_free(cam->tr);
 	mtx_free(cam->tt);
 	mtx_free(cam->view_mtx);
-	mtx_free(cam->proj_mtx);
+	mtx_free(cam->g_proj);
 	mtx_free(cam->comp);
 	mtx_free(cam->xyz[0]);
 	mtx_free(cam->xyz[1]);

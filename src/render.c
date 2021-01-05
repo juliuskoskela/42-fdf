@@ -6,24 +6,22 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 03:40:58 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/05 06:00:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			render(t_world **wrld, t_mtx **buff, size_t buffsize)
+void			render(t_world **wrld)
 {
-	size_t		i;
-	int			x;
-	int			y;
+	t_dlist		*tmp;
+	t_mtx		*cast;
 
-	i = 0;
-	while (i < buffsize)
+	tmp = (*wrld)->wrld_buff;
+	while (tmp)
 	{
-		x = (int)buff[i]->this[0];
-		y = (int)buff[i]->this[1];
-		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, x, y, 0xFFFFFF);
-		i++;
+		cast = tmp->content;
+		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, cast->this[0], cast->this[1], 0xFFFFFF);
+		tmp = tmp->next;
 	}
 }

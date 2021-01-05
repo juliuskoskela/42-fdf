@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:58:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/03 23:58:33 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/04 20:55:07 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			printf_buff(t_dlist *buff)
+void			print_buff(t_dlist *buff)
 {
 	t_dlist		*tmp;
 	t_mtx		*cast;

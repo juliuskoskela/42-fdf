@@ -12,23 +12,22 @@
 
 #include "../inc/fdf.h"
 
-void			process_world_buffer(t_world **wrld, int verbose)
+void			proc_buff(t_dlist *buff, t_mtx *comp, int verbose)
 {
-	size_t		i;
-	t_mtx		*tmp;
-	t_dlist		*pos;
+	t_mtx		*cast;
+	t_mtx		*mult;
 
-	i = 0;
-	tmp = NULL;
-	pos = (*wrld)->wrld_prebuff;
-	while (pos)
+	mult = mtx_new("tmp", 1, 4);
+	while (buff)
 	{
-		(*wrld)->wrld_buff[i] = mtx_new(c_itoa(i), 1, 2);
-		tmp = pos->content;
-		mtx_multiply((*wrld)->wrld_buff[i], (*wrld)->comp, tmp);
-		pos = pos->next;
-		i++;
+		if ((cast = buff->content) != NULL)
+		{
+			mtx_multiply(mult, comp, cast);
+			mtx_cpy(cast, mult);
+		}
+		buff = buff->next;
 	}
+	free(mult);
 	if (verbose == 1)
-		printf("World buffer processed!\n\n");
+		printf("Buffer processed!\n\n");
 }
