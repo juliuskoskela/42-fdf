@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 19:47:51 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 19:35:34 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void			destruct_camera(t_camera *cam, int verbose)
 	mtx_free(cam->xyz[2]);
 	free(cam->xyz);
 	free(cam);
-	if (verbose == 1)
+	if (verbose > 0)
 		printf("\nCamera destructed!\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 03:33:43 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/05 04:36:37 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_object		*construct_object(char *file, int verbose)
 	out->tt = mtx_new("tT", 4, 4);
 	out->comp = mtx_new("CO", 4, 4);
 	out->file = file;
-	if (verbose == 1)
+	if (verbose > 0)
 		printf("\nObject constructed from %s!\n\n", file);
 	return (out);
 }

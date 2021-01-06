@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 02:22:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 19:35:34 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_camera		*construct_camera(int verbose)
 	out->view_mtx = mtx_new("V", 4, 4);
 	out->g_proj = mtx_new("P", 4, 4);
 	out->comp = mtx_new("CC", 4, 4);
-	if (verbose == 1)
+	if (verbose > 0)
 		printf("\nCamera constructed!\n\n");
 	return (out);
 }

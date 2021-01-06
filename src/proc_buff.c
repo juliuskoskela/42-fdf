@@ -28,6 +28,6 @@ void			proc_buff(t_dlist *buff, t_mtx *comp, int verbose)
 		buff = buff->next;
 	}
 	free(mult);
-	if (verbose == 1)
+	if (verbose > 0)
 		printf("Buffer processed!\n\n");
 }

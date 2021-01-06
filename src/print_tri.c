@@ -1,47 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destruct_object.c                                  :+:      :+:    :+:   */
+/*   print_tri.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 19:52:26 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/06 02:36:08 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/06 02:36:15 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static void		free_obj_vtx_buff(t_dlist *buff)
+void			print_tri(t_dlist *tris)
 {
-	t_mtx		*cast;
 	t_dlist		*tmp;
+	t_tri		*cast;
+	size_t		i;
 
-	tmp = buff;
+	tmp = tris;
+	i = 0;
 	while (tmp)
 	{
 		cast = tmp->content;
-		mtx_free(cast);
+		printf("%zu\nv1 (%.1f, %.1f, %.1f) (%.1f)\n", i, cast->v1->this[0], \
+		cast->v1->this[1], cast->v1->this[2], cast->v1->this[3]);
+		printf("v2 (%.1f, %.1f, %.1f) (%.1f)\n", cast->v2->this[0], \
+		cast->v2->this[1], cast->v2->this[2], cast->v2->this[3]);
+		printf("v3 (%.1f, %.1f, %.1f) (%.1f)\n\n", cast->v3->this[0], \
+		cast->v3->this[1], cast->v3->this[2], cast->v3->this[3]);
 		tmp = tmp->next;
+		i++;
 	}
-	dl_del_list(buff);
-	buff = NULL;
-}
-
-void			destruct_object(t_object *obj, int verbose)
-{
-	mtx_free(obj->comp);
-	mtx_free(obj->rot);
-	mtx_free(obj->scl);
-	mtx_free(obj->xyz[0]);
-	mtx_free(obj->xyz[1]);
-	mtx_free(obj->xyz[2]);
-	mtx_free(obj->rot);
-	mtx_free(obj->tt);
-	free_obj_vtx_buff(obj->obj_vtx_buff);
-	free(obj->ori);
-	free(obj->pos);
-	free(obj->pos);
-	if (verbose > 0)
-		printf("\nObject destructed!\n\n");
 }

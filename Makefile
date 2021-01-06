@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2021/01/05 05:18:28 by jkoskela         ###   ########.fr        #
+#    Updated: 2021/01/06 02:36:29 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= fdf
 
 # src / obj files
 SRC		=	main.c \
-render.c \
+			render.c \
 			construct_camera.c \
 			construct_object.c \
 			construct_world.c \
@@ -29,6 +29,9 @@ render.c \
 			proc_buff.c \
 			print_buff.c \
 			view_mtx.c \
+			map_vtx_tri.c \
+			tri_new.c \
+			print_tri.c \
 			input_parse.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))

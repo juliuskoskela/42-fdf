@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 02:17:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 05:30:01 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void			view_mtx(t_camera *cam, int verbose)
 
 	// Multiply `tR * tT` to get `view_mtx`.
 	mtx_multiply(cam->view_mtx, cam->tr, cam->tt);
-	if (verbose == 1)
+	if (verbose > 0)
 		print_method(cam);
 }

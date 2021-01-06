@@ -42,7 +42,8 @@ typedef struct		s_object
 	t_mtx			*tt;
 	t_mtx			*scl;
 	t_mtx			*comp;
-	t_dlist			*obj_buff;
+	t_dlist			*obj_vtx_buff;
+	t_dlist			*obj_tri_buff;
 }					t_object;
 
 typedef struct		s_world
@@ -56,7 +57,8 @@ typedef struct		s_world
 	size_t			buffsize;
 	t_camera		**cam_arr;
 	t_object		**obj_arr;
-	t_dlist			*wrld_buff;
+	t_dlist			*wrld_vtx_buff;
+	t_dlist			*wrld_tri_buff;
 	t_mtx			*comp;
 }					t_world;
 
@@ -91,12 +93,15 @@ void			set_world(t_world **wrld, int verbose);
 void			set_camera(t_camera **cam, int verbose);
 void			set_object(t_object **obj, int verbose);
 void			proc_buff(t_dlist *buff, t_mtx *comp, int verbose);
-void			comp_object(t_object **obj, int verbose);
+void			comp_object(t_object *obj, int verbose);
 void			comp_camera(t_camera **cam, int verbose);
 void			render(t_world **wrld);
 void			print_buff(t_dlist *buff);
 t_dlist			*input_parse(char *input_file);
 void			view_mtx(t_camera *cam, int verbose);
+t_dlist			*map_vtx_tri(t_dlist *buff, size_t x);
+t_tri			*tri_new(t_mtx *a, t_mtx *b, t_mtx *c);
+void			print_tri(t_dlist *tris);
 int				main(int argc, char **argv);
 
 #endif
