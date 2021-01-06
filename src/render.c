@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:24:39 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 06:36:02 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,25 @@ void			plot_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 	}
 }
 
-void			render(t_world **wrld)
+void			render(t_world *wrld)
 {
 	t_dlist		*tmp;
 	t_tri		*cast;
 
-	tmp = (*wrld)->wrld_tri_buff;
+	tmp = wrld->wrld_tri_buff;
 	while (tmp)
 	{
 		cast = tmp->content;
-		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, \
+		mlx_pixel_put(wrld->mlx_ptr, wrld->win_ptr, \
 		cast->v1->this[0], cast->v1->this[1], 0xFFFFFF);
-		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, \
+		mlx_pixel_put(wrld->mlx_ptr, wrld->win_ptr, \
 		cast->v2->this[0], cast->v2->this[1], 0xFFFFFF);
-		mlx_pixel_put((*wrld)->mlx_ptr, (*wrld)->win_ptr, \
+		mlx_pixel_put(wrld->mlx_ptr, wrld->win_ptr, \
 		cast->v3->this[0], cast->v3->this[1], 0xFFFFFF);
-		plot_line((*wrld)->mlx_ptr, (*wrld)->win_ptr, \
+		plot_line(wrld->mlx_ptr, wrld->win_ptr, \
 		cast->v1->this[0], cast->v1->this[1], \
 		cast->v2->this[0], cast->v2->this[1]);
-		plot_line((*wrld)->mlx_ptr, (*wrld)->win_ptr, \
+		plot_line(wrld->mlx_ptr, wrld->win_ptr, \
 		cast->v1->this[0], cast->v1->this[1], \
 		cast->v3->this[0], cast->v3->this[1]);
 		tmp = tmp->next;

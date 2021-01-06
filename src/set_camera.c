@@ -6,26 +6,42 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:50:41 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:51:42 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 07:03:47 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			set_camera(t_camera **cam, int verbose)
+static void			print_method(t_camera *cam, int verbose)
 {
-	(*cam)->width = RESX;
-	(*cam)->height = RESY;
-	(*cam)->ratio = (*cam)->width / (*cam)->height;
-	(*cam)->near = 1.0;
-	(*cam)->far = 1000.0;
-	(*cam)->fov = 60;
-	(*cam)->pos->this[0] = 0;
-	(*cam)->pos->this[1] = 0;
-	(*cam)->pos->this[2] = 0;
-	(*cam)->ori->this[0] = 0;
-	(*cam)->ori->this[1] = 0;
-	(*cam)->ori->this[2] = 0;
+	if (verbose == 2)
+	{
+		printf("cam->pos[0] = %f\n", cam->pos->this[0]);
+		printf("cam->pos[1] = %f\n", cam->pos->this[1]);
+		printf("cam->pos[2] = %f\n", cam->pos->this[2]);
+		printf("cam->ori[0] = %f\n", cam->ori->this[0]);
+		printf("cam->ori[1] = %f\n", cam->ori->this[1]);
+		printf("cam->ori[2] = %f\n", cam->ori->this[2]);
+		printf("cam->ratio  = %f\n", cam->ratio);
+		printf("cam->near   = %f\n", cam->near);
+		printf("cam->far    = %f\n", cam->far);
+		printf("cam->fov    = %f\n", cam->fov);
+	}
+	printf("\nObject set!\n\n");
+}
+
+void			set_camera(t_camera *cam, int verbose)
+{
+	cam->ratio = (double)RESX / (double)RESY;
+	cam->near = 1.0;
+	cam->far = 1000.0;
+	cam->fov = 60;
+	cam->pos->this[0] = 0;
+	cam->pos->this[1] = 0;
+	cam->pos->this[2] = 0;
+	cam->ori->this[0] = 0;
+	cam->ori->this[1] = 0;
+	cam->ori->this[2] = 0;
 	if (verbose > 0)
-		printf("\nCamera set!\n\n");
+		print_method(cam, verbose);
 }

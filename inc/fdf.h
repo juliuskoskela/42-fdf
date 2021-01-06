@@ -12,8 +12,6 @@
 
 typedef struct		s_camera
 {
-	double			width;
-	double			height;
 	double			ratio;
 	double			near;
 	double			far;
@@ -35,6 +33,9 @@ typedef struct		s_object
 	char			*file;
 	double			g_scale;
 	size_t			vtx_cnt;
+	size_t			x;
+	size_t			y;
+	size_t			z;
 	t_mtx			*pos;
 	t_mtx			*ori;
 	t_mtx			**xyz;
@@ -49,8 +50,6 @@ typedef struct		s_object
 typedef struct		s_world
 {
 	char			*name;
-	int				resx;
-	int				resy;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	size_t			obj_cnt;
@@ -72,9 +71,6 @@ typedef struct		s_tri
 typedef struct		s_parse
 {
 	int				fd;
-	int				row;
-	int				col;
-	int				cnt;
 	int				i;
 	int				j;
 	int				sign;
@@ -85,19 +81,19 @@ typedef struct		s_parse
 
 t_world			*construct_world(int verbose);
 t_camera		*construct_camera(int verbose);
-t_object		*construct_object(char *file, int verbose);
+t_object		*construct_object(int verbose);
 void			destruct_world(t_world *wrld, int verbose);
 void			destruct_camera(t_camera *cam, int verbose);
 void			destruct_object(t_object *obj, int verbose);
-void			set_world(t_world **wrld, int verbose);
-void			set_camera(t_camera **cam, int verbose);
-void			set_object(t_object **obj, int verbose);
+void			set_world(t_world *wrld, int verbose);
+void			set_camera(t_camera *cam, int verbose);
+void			set_object(t_object *obj, char *file, int verbose);
 void			proc_buff(t_dlist *buff, t_mtx *comp, int verbose);
 void			comp_object(t_object *obj, int verbose);
-void			comp_camera(t_camera **cam, int verbose);
-void			render(t_world **wrld);
+void			comp_camera(t_camera *cam, int verbose);
+void			render(t_world *wrld);
 void			print_buff(t_dlist *buff);
-t_dlist			*input_parse(char *input_file);
+t_dlist			*input_parse(t_object *obj);
 void			view_mtx(t_camera *cam, int verbose);
 t_dlist			*map_vtx_tri(t_dlist *buff, size_t x);
 t_tri			*tri_new(t_mtx *a, t_mtx *b, t_mtx *c);

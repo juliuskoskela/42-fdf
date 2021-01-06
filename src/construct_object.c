@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 03:33:43 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 05:55:32 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_object		*construct_object(char *file, int verbose)
+t_object		*construct_object(int verbose)
 {
 	t_object	*out;
 
@@ -27,8 +27,7 @@ t_object		*construct_object(char *file, int verbose)
 	out->scl = mtx_new("S", 4, 4);
 	out->tt = mtx_new("tT", 4, 4);
 	out->comp = mtx_new("CO", 4, 4);
-	out->file = file;
 	if (verbose > 0)
-		printf("\nObject constructed from %s!\n\n", file);
+		printf("\nObject constructed!\n\n");
 	return (out);
 }

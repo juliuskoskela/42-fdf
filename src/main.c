@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 03:43:04 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:54:48 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 07:08:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,30 @@ int				main(int argc, char **argv)
 	t_world		*wrld;
 	t_camera	*cam1;
 	t_object	*obj1;
+	t_mtx		*comp;
 	int			verbose;
 
 	argc = 0;
 	verbose = 2;
-
+	comp = mtx_new("C", 4, 4);
 	wrld = construct_world(verbose);
 	cam1 = construct_camera(verbose);
-	obj1 = construct_object(s_dup(argv[1]), verbose);
+	obj1 = construct_object(verbose);
 
-	set_world(&wrld, verbose);
-	set_camera(&cam1, verbose);
-	set_object(&obj1, verbose);
+	set_world(wrld, verbose);
+	set_camera(cam1, verbose);
+	set_object(obj1, argv[1], verbose);
 
 	comp_object(obj1, verbose);
-	comp_camera(&cam1, verbose);
+	comp_camera(cam1, verbose);
 
-	proc_buff(obj1->obj_vtx_buff, obj1->comp, verbose);
 	wrld->wrld_vtx_buff = obj1->obj_vtx_buff;
 	wrld->wrld_tri_buff = obj1->obj_tri_buff;
-	proc_buff(wrld->wrld_vtx_buff, cam1->comp, verbose);
+
+	mtx_multiply(comp, cam1->comp, obj1->comp);
+	proc_buff(wrld->wrld_vtx_buff, comp, verbose);
 	print_tri(obj1->obj_tri_buff);
-	render(&wrld);
+	render(wrld);
 	mlx_loop(wrld->mlx_ptr);
 	return (0);
 }
