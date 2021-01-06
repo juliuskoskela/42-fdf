@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 02:17:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 23:53:03 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,28 @@ static void		print_method(t_camera *cam)
 
 void			view_mtx(t_camera *cam, int verbose)
 {
-	// Rotation matrix `R` from camera origin.
-	g_rotx(cam->xyz[2], cam->ori->this[0]);
+	g_rotx(cam->xyz[0], cam->ori->this[0]);
 	g_roty(cam->xyz[1], cam->ori->this[1]);
-	g_rotz(cam->xyz[0], cam->ori->this[2]);
-	mtx_arr_multiply(cam->rot, cam->xyz, 3);
-
-	// Origin matrix `tR` is created by transposing the rotation matrix `R`.
+	g_rotz(cam->xyz[2], cam->ori->this[2]);
+	mtx_multiply(cam->rot, cam->xyz[0], cam->xyz[1]);
+	mtx_multiply(cam->rot, cam->rot, cam->xyz[2]);
 	mtx_transpose(cam->tr, cam->rot);
-
-	// Calculate the opposite vector of the given camera position.
 	cam->ovct->this = vct_opp(cam->pos->this, 3);
-
-	// g_trans matrix `tT` from ovct.
 	g_trans(cam->tt, cam->ovct);
-
-	// Multiply `tR * tT` to get `view_mtx`.
 	mtx_multiply(cam->view_mtx, cam->tr, cam->tt);
 	if (verbose > 0)
 		print_method(cam);
 }
+
+/*
+**  ----------------------------------------------------------------------------
+**
+**	View_mtx
+**
+**	1. Rotation matrix `R` from camera origin.
+**	2. Origin matrix `tR` is created by transposing the rotation matrix `R`.
+**	3. Calculate the opposite vector of the given camera position.
+**	4. G_trans matrix `tT` from ovct.
+**	5. Multiply `tR * tT` to get `view_mtx`.
+**
+*/

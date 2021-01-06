@@ -6,11 +6,26 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 03:43:04 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 07:08:11 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/06 22:21:37 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
+
+// t_mtx			*mtx_dup(t_mtx *mtx)
+// {
+// 	t_mtx		*out;
+// 	int			i;
+
+// 	i = 0;
+// 	out = (s_join("d", mtx->name), 4, 4);
+// 	while (i < out->x * out->y)
+// 	{
+// 		out->this[i] = mtx->this[i];
+// 		i++;
+// 	}
+// 	return (out);
+// }
 
 int				main(int argc, char **argv)
 {
