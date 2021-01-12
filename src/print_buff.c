@@ -6,22 +6,24 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:58:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 20:55:07 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/11 17:20:28 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			print_buff(t_dlist *buff)
+void		print_buff(t_tri *buff, size_t size)
 {
-	t_dlist		*tmp;
-	t_mtx		*cast;
+	size_t		i;
 
-	tmp = buff;
-	while (tmp)
+	i = 0;
+	while (i < size)
 	{
-		cast = tmp->content;
-		mtx_print(cast);
-		tmp = tmp->next;
+		g_print_vct(buff[i].a, i);
+		g_print_vct(buff[i].b, i);
+		g_print_vct(buff[i].c, i);
+		printf("\n");
+		i++;
 	}
+	p_char('\n');
 }

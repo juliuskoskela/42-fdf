@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   construct_object.c                                 :+:      :+:    :+:   */
+/*   shape_cube.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 03:33:43 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/11 03:29:43 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/11 03:27:30 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/11 03:27:41 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_object		*construct_object(char *name)
+t_vct4			*shape_cube()
 {
-	t_object	*out;
+	t_vct4		*out;
 
-	out = (t_object *)v_alloc(sizeof(t_object));
-	out->name = name;
+	out = (t_vct4 *)v_alloc(sizeof(t_vct4) * 8);
+	out[0] = g_vct4(0, 0, 0, 1);
+	out[1] = g_vct4(0, 1, 0, 1);
+	out[2] = g_vct4(1, 0, 0, 1);
+	out[3] = g_vct4(1, 1, 0, 1);
+	out[4] = g_vct4(0, 0, 1, 1);
+	out[5] = g_vct4(0, 1, 1, 1);
+	out[6] = g_vct4(1, 0, 1, 1);
+	out[7] = g_vct4(1, 1, 1, 1);
 	return (out);
 }

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   construct_object.c                                 :+:      :+:    :+:   */
+/*   vct4.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 03:33:43 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/11 03:29:43 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/10 23:33:36 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/10 23:33:46 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_object		*construct_object(char *name)
+t_vct4			vct4(double x, double y, double z, double w)
 {
-	t_object	*out;
+	t_vct4		out;
 
-	out = (t_object *)v_alloc(sizeof(t_object));
-	out->name = name;
+	out.x = x;
+	out.y = y;
+	out.z = z;
+	out.w = w;
 	return (out);
 }

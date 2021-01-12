@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:50:41 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 07:03:47 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/10 23:01:15 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void			set_camera(t_camera *cam, int verbose)
 	cam->near = 1.0;
 	cam->far = 1000.0;
 	cam->fov = 60;
-	cam->pos->this[0] = 0;
-	cam->pos->this[1] = 0;
-	cam->pos->this[2] = 0;
+	cam->pos->this[0] = 100;
+	cam->pos->this[1] = 100;
+	cam->pos->this[2] = 100;
 	cam->ori->this[0] = 0;
 	cam->ori->this[1] = 0;
 	cam->ori->this[2] = 0;

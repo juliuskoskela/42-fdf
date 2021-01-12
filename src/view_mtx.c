@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 02:17:34 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 23:53:03 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/10 23:04:20 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			view_mtx(t_camera *cam, int verbose)
 	g_rotz(cam->xyz[2], cam->ori->this[2]);
 	mtx_multiply(cam->rot, cam->xyz[0], cam->xyz[1]);
 	mtx_multiply(cam->rot, cam->rot, cam->xyz[2]);
+	// cam->rot = look_at(cam->ori->this, cam->watch);
 	mtx_transpose(cam->tr, cam->rot);
 	cam->ovct->this = vct_opp(cam->pos->this, 3);
 	g_trans(cam->tt, cam->ovct);
