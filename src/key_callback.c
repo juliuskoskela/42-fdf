@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:30:47 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 04:27:48 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 23:55:53 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_world			move_camera(t_world wrld, int x, int y, int z)
 	wrld.active_camera.position.y += y;
 	wrld.active_camera.position.z += z;
 	wrld.active_camera.view_mtx = compose_view(wrld.active_camera, 0);
-	wrld.world_mtx = g_mult_mtx(wrld.active_camera.view_mtx, wrld.active_camera.proj_mtx);
+	wrld.world_mtx = g_mult_mtx(wrld.active_camera.view_mtx, \
+	wrld.active_camera.proj_mtx);
 	wrld = process_world(wrld, 0);
 	return (wrld);
 }
@@ -29,7 +30,32 @@ t_world			rotate_camera(t_world wrld, int x, int y, int z)
 	wrld.active_camera.direction.y += y;
 	wrld.active_camera.direction.z += z;
 	wrld.active_camera.view_mtx = compose_view(wrld.active_camera, 0);
-	wrld.world_mtx = g_mult_mtx(wrld.active_camera.view_mtx, wrld.active_camera.proj_mtx);
+	wrld.world_mtx = g_mult_mtx(wrld.active_camera.view_mtx, \
+	wrld.active_camera.proj_mtx);
+	wrld = process_world(wrld, 0);
+	return (wrld);
+}
+
+t_world			change_camera(t_world wrld)
+{
+	if (wrld.active_camera.index == 0)
+	{
+		wrld.camera_1 = wrld.active_camera;
+		wrld.active_camera = wrld.camera_2;
+	}
+	else if (wrld.active_camera.index == 1)
+	{
+		wrld.camera_2 = wrld.active_camera;
+		wrld.active_camera = wrld.camera_3;
+	}
+	else if (wrld.active_camera.index == 2)
+	{
+		wrld.camera_3 = wrld.active_camera;
+		wrld.active_camera = wrld.camera_1;
+	}
+	wrld.active_camera.view_mtx = compose_view(wrld.active_camera, 0);
+	wrld.world_mtx = g_mult_mtx(wrld.active_camera.view_mtx, \
+	wrld.active_camera.proj_mtx);
 	wrld = process_world(wrld, 0);
 	return (wrld);
 }
@@ -68,6 +94,11 @@ int				key_callback(int keycode, t_world *wrld)
 	// Move right
 	else if (keycode == 2)
 		*wrld = move_camera(*wrld, 1, 0, 0);
+	// Change camera
+	else if (keycode == 8)
+	{
+		*wrld = change_camera(*wrld);
+	}
 	// Exit
 	else if (keycode == 53)
 	{

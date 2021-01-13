@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 05:00:39 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 23:29:57 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			render_tri(void *mlx, void * win, t_tri *tri)
+static void		render_tri(void *mlx, void *win, t_tri *tri)
 {
 	mlx_pixel_put(mlx, win, tri->a.x, tri->a.y, 0xFFFFFF);
 	mlx_pixel_put(mlx, win, tri->b.x, tri->b.y, 0xFFFFFF);
@@ -29,6 +29,7 @@ void			render(t_world wrld)
 	while (i < wrld.tri_cnt)
 	{
 		render_tri(wrld.mlx_ptr, wrld.win_ptr, &wrld.buffer[i]);
+		// draw_triangle(wrld.mlx_ptr, wrld.win_ptr, wrld.buffer[i]);
 		i++;
 	}
 	mlx_key_hook(wrld.win_ptr, key_callback, &wrld);

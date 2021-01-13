@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 20:16:30 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 18:42:29 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 22:57:49 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ t_mtx4			look_at(t_vct4 from, t_vct4 to, int verbose)
 	tmp = g_norm(tmp);
 	right = g_cross(tmp, forward);
 	up = g_cross(forward, right);
-	out.name = ("L");
 	out.v1 = right;
 	out.v2 = up;
 	out.v3 = forward;
 	out.v4 = from;
 	out.v4.w = 1;
 	if (verbose < 0)
-		g_print_mtx(out);
+		printf("Looking at object!");
 	return (out);
 }
 
 /*
+**
 **  ----------------------------------------------------------------------------
 **
 **	Step 1: compute the forward axis.

@@ -6,18 +6,16 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 01:00:44 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 03:15:28 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 19:35:10 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/fdf.h"
 
-t_camera		create_camera(char *name, int verbose)
+t_camera		create_camera(int verbose)
 {
 	t_camera	out;
 
-	out.name = name;
 	out.ratio = RESX / RESY;
 	out.near = 1;
 	out.far = 1000;

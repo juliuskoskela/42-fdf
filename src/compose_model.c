@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   comp_model.c                                      :+:      :+:    :+:   */
+/*   compose_model.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 23:49:24 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/11 10:38:07 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 18:22:36 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 22:54:52 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/fdf.h"
-
-static void		print_method(t_object obj)
-{
-	printf("\nComposing model: %s\n\n", obj.name);
-	g_print_mtx(obj.rotx);
-	g_print_mtx(obj.roty);
-	g_print_mtx(obj.rotz);
-	g_print_mtx(obj.rotation);
-	g_print_mtx(obj.translation);
-	g_print_mtx(obj.transformation);
-	printf("\n%s composed:\n\n", obj.name);
-}
 
 t_mtx4			compose_model(t_object obj, int verbose)
 {
@@ -40,6 +27,6 @@ t_mtx4			compose_model(t_object obj, int verbose)
 	tmp1 = g_mult_mtx(obj.rotation, obj.transformation);
 	tmp2 = g_mult_mtx(tmp1, obj.translation);
 	if (verbose > 0)
-		print_method(obj);
+		printf("Model matrix composed!\n\n");
 	return (tmp2);
 }

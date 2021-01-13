@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 06:07:20 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 02:45:41 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 23:41:04 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define MAX_BUFF 1000000
+# define MAX_BUFF 100000
 # define RESX 1920
 # define RESY 1280
 # include <string.h>
@@ -24,7 +24,7 @@
 
 typedef struct		s_camera
 {
-	char			*name;
+	int				index;
 	double			ratio;
 	double			near;
 	double			far;
@@ -74,7 +74,10 @@ typedef struct		s_world
 	size_t			vtx_cnt;
 	size_t			tri_cnt;
 	t_camera		active_camera;
-	t_camera		*cameras;
+	t_camera		camera_1;
+	t_camera		camera_2;
+	t_camera		camera_3;
+	t_htable		*cams;
 	t_object		*objects;
 	t_tri			*buffer;
 }					t_world;
@@ -90,28 +93,30 @@ typedef struct		s_parse
 	t_dlist			*out;
 }					t_parse;
 
-void			draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1);
 t_object		create_mesh(char *file, char *name, int verbose);
-t_camera		create_camera(char *name, int verbose);
-t_world			create_world(char *name, int verbose);
-t_world			activate_camera(t_world out, size_t i, int verbose);
-t_world			add_camera(t_world out, t_camera new, int verbose);
-t_world			add_object(t_world out, t_object new, int verbose);
-t_world			process_world(t_world out, int verbose);
-int				key_callback(int keycode, t_world *wrld);
-t_tri			*allocate_buffer(size_t size);
-void			print_vct_arr(t_vct4 *arr, size_t size);
-t_tri			*grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size);
-t_tri			*process_buffer(t_tri *buff, t_tri *ori, t_mtx4 comp, size_t size);
-t_vct4			get_mesh_dimensions(t_vct4 *shape, size_t size);
-t_mtx4			compose_model(t_object obj, int verbose);
-t_mtx4			compose_view(t_camera cam, int verbose);
 t_object		shape_cube(t_object obj);
 t_object		shape_tetra(t_object obj);
 t_object		shape_file(t_object obj, char *file);
+t_camera		create_camera(int verbose);
+t_world			create_world(char *name, int verbose);
+t_world			activate_camera(t_world out, size_t i, int verbose);
+t_world			add_camera(t_world out, t_camera new, int index, int verbose);
+t_world			add_object(t_world out, t_object new, int verbose);
+t_world			process_world(t_world out, int verbose);
+t_tri			*allocate_buffer(size_t size);
+t_tri			*grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size);
+t_tri			*process_buffer(t_tri *d, t_tri *s, t_mtx4 mtx, size_t size);
+t_vct4			get_mesh_dimensions(t_vct4 *shape, size_t size);
+t_mtx4			compose_model(t_object obj, int verbose);
+t_mtx4			compose_view(t_camera cam, int verbose);
 t_mtx4			look_at(t_vct4 from, t_vct4 to, int vebrose);
-void			render(t_world wrld);
+void			print_vct_arr(t_vct4 *arr, size_t size);
 void			print_tri_arr(t_tri *arr, size_t size);
+void			render(t_world wrld);
+void			draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1);
+void			draw_circle(void *mlx, void *win, t_vct4 offset, int radius);
+void			draw_triangle(void *mlx, void *win, t_tri tri);
+int				key_callback(int keycode, t_world *wrld);
 int				main(int argc, char **argv);
 
 #endif

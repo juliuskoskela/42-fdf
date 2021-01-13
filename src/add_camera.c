@@ -6,17 +6,19 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 01:02:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 01:02:10 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 23:47:25 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			add_camera(t_world out, t_camera new, int verbose)
+t_world			add_camera(t_world out, t_camera new, int index, int verbose)
 {
-	out.cameras[out.cam_cnt] = new;
+	// out.cameras[index] = new;
 	out.cam_cnt += 1;
+	index = 1;
+	new.index = 0;
 	if (verbose > 0)
 		printf("Camera added!\n\n");
-	return (activate_camera(out, out.cam_cnt - 1, verbose));
+	return (activate_camera(out, index, verbose));
 }

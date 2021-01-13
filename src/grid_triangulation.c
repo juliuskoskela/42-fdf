@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:55:21 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 22:16:11 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 18:17:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,8 @@ t_tri			*grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size)
 		}
 		else
 		{
-			d[k].a = s[i];
-			d[k].b = s[i + 1];
-			d[k].c = s[i + w];
-			d[k + 1].a = s[i + w + 1];
-			d[k + 1].b = s[i + 1];
-			d[k + 1].c = s[i + w];
+			d[k] = g_tri(s[i], s[i + 1], s[i + w]);
+			d[k + 1] = g_tri(s[i + w + 1], s[i + 1], s[i + w]);
 			k += 2;
 			i++;
 			j++;
