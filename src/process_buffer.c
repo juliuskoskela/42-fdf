@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_world.c                                        :+:      :+:    :+:   */
+/*   process_buffer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 23:52:38 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 06:48:27 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/12 20:47:50 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/12 21:21:07 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			set_world(t_world *wrld, int verbose)
+t_tri			*process_buffer(t_tri *buff, t_tri *ori, t_mtx4 comp, size_t size)
 {
-	wrld->name = s_dup("fdf");
-	wrld->mlx_ptr = mlx_init();
-	wrld->win_ptr = mlx_new_window(wrld->mlx_ptr, RESX, RESY, "fdf");
-	if (verbose > 0)
-		printf("\nWorld set!\n\n");
+	size_t		i;
+
+	i = 0;
+	while (i < size)
+	{
+		buff[i].a = g_mult_vct(comp, ori[i].a);
+		buff[i].b = g_mult_vct(comp, ori[i].b);
+		buff[i].c = g_mult_vct(comp, ori[i].c);
+		i++;
+	}
+	return (buff);
 }

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   construct_camera.c                                 :+:      :+:    :+:   */
+/*   print_vct_arr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/31 02:22:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/11 03:29:02 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/12 20:56:35 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/12 20:56:36 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_camera		*construct_camera(double ratio, int near, int far, int fov)
+void			print_vct_arr(t_vct4 *arr, size_t size)
 {
-	t_camera	*out;
+	size_t		i;
 
-	out = (t_camera *)v_alloc(sizeof(t_camera));
-	out->ratio = ratio;
-	out->near = near;
-	out->far = far;
-	out->fov = fov;
-	return (out);
+	i = 0;
+	while (i < size)
+	{
+		g_print_vct(arr[i], i);
+		i++;
+	}
 }

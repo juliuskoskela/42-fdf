@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tri_new.c                                          :+:      :+:    :+:   */
+/*   create_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 02:34:56 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/10 22:13:31 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 02:11:24 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_tri			*tri_new(t_mtx *a, t_mtx *b, t_mtx *c)
+t_world			create_world(char *name, int verbose)
 {
-	t_tri		*out;
+	t_world		out;
 
-	out = (t_tri *)v_alloc(sizeof(t_tri));
-	out->ax = a->this[0];
-	out->ay = a->this[1];
-	out->az = a->this[2];
-	out->aw = a->this[3];
-	out->bx = b->this[0];
-	out->by = b->this[1];
-	out->bz = b->this[2];
-	out->bw = b->this[3];
-	out->cx = c->this[0];
-	out->cy = c->this[1];
-	out->cz = c->this[2];
-	out->cw = c->this[3];
+	out.name = name;
+	out.buffer = allocate_buffer(MAX_BUFF);
+	out.cameras = (t_camera *)v_alloc(sizeof(t_camera) * 10);
+	out.objects = (t_object *)v_alloc(sizeof(t_object) * 10);
+	out.cam_cnt = 0;
+	out.obj_cnt = 0;
+	out.tri_cnt = 0;
+	if (verbose > 0)
+		printf("World created!\n\n");
 	return (out);
 }

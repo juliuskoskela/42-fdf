@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct4.c                                             :+:      :+:    :+:   */
+/*   activate_camera.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 23:33:36 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/10 23:33:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:01:43 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 01:01:44 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../inc/fdf.h"
 
-t_vct4			vct4(double x, double y, double z, double w)
+t_world			activate_camera(t_world out, size_t i, int verbose)
 {
-	t_vct4		out;
-
-	out.x = x;
-	out.y = y;
-	out.z = z;
-	out.w = w;
+	out.active_camera = out.cameras[i];
+	out.world_mtx = g_mult_mtx(out.active_camera.view_mtx, out.active_camera.proj_mtx);
+	if (verbose > 0)
+	{
+		printf("Camera activated!\n\n");
+		g_print_mtx(out.world_mtx);
+	}
 	return (out);
 }

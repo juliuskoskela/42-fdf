@@ -25,7 +25,7 @@ static void		print_method(t_object obj)
 	printf("\n%s composed:\n\n", obj.name);
 }
 
-t_mtx4			comp_model(t_object obj, int verbose)
+t_mtx4			compose_model(t_object obj, int verbose)
 {
 	t_mtx4		tmp1;
 	t_mtx4		tmp2;

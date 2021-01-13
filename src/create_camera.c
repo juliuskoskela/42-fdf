@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destruct_camera.c                                  :+:      :+:    :+:   */
+/*   create_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 19:47:51 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:00:44 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 01:00:45 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../inc/fdf.h"
 
-void			destruct_camera(t_camera *cam, int verbose)
+t_camera		create_camera(char *name, int verbose)
 {
-	free(cam->pos);
-	free(cam->ori);
-	mtx_free(cam->ovct);
-	mtx_free(cam->rot);
-	mtx_free(cam->tr);
-	mtx_free(cam->tt);
-	mtx_free(cam->view_mtx);
-	mtx_free(cam->g_proj);
-	mtx_free(cam->comp);
-	mtx_free(cam->xyz[0]);
-	mtx_free(cam->xyz[1]);
-	mtx_free(cam->xyz[2]);
-	free(cam->xyz);
-	free(cam);
+	t_camera	out;
+
+	out.name = name;
+	out.ratio = RESX / RESY;
+	out.near = 1;
+	out.far = 1000;
+	out.fov = 60;
+	out.position = g_vct4(0, 100, 0, 1);
+	out.direction = g_vct4(45, 0, 0, 1);
+	out.view_mtx = compose_view(out, verbose);
+	out.proj_mtx = g_proj(out.fov, out.ratio, out.near, out.far);
 	if (verbose > 0)
-		printf("\nCamera destructed!\n\n");
+		printf("Camera created!\n\n");
+	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 17:32:03 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:11:24 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,25 @@ void			plot_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 	}
 }
 
-void			print_tri(t_tri tri, int i)
-{
-	g_print_vct(tri.a, i);
-	g_print_vct(tri.b, i);
-	g_print_vct(tri.c, i);
-}
-
-void			render(t_tri *buff, void *mlx, void *win, size_t size)
+void			render(t_world wrld)
 {
 	size_t		i;
 
-
 	i = 0;
-	while (i < size)
+	while (i < wrld.tri_cnt)
 	{
-		mlx_pixel_put(mlx, win, buff[i].a.x, buff[i].a.y, 0xFFFFFF);
-		mlx_pixel_put(mlx, win, buff[i].b.x, buff[i].b.y, 0xFFFFFF);
-		mlx_pixel_put(mlx, win, buff[i].c.x, buff[i].c.y, 0xFFFFFF);
-		// print_tri(buff[i], i);
-		// printf("\n");
-		plot_line(mlx, win, buff[i].a.x, buff[i].a.y, buff[i].b.x, buff[i].b.y);
-		plot_line(mlx, win, buff[i].a.x, buff[i].a.y, buff[i].c.x, buff[i].c.y);
+		mlx_pixel_put(wrld.mlx_ptr, wrld.win_ptr, \
+		wrld.buffer[i].a.x, wrld.buffer[i].a.y, 0xFFFFFF);
+		mlx_pixel_put(wrld.mlx_ptr, wrld.win_ptr, \
+		wrld.buffer[i].b.x, wrld.buffer[i].b.y, 0xFFFFFF);
+		mlx_pixel_put(wrld.mlx_ptr, wrld.win_ptr,\
+		 wrld.buffer[i].c.x, wrld.buffer[i].c.y, 0xFFFFFF);
+		plot_line(wrld.mlx_ptr, wrld.win_ptr, \
+		wrld.buffer[i].a.x, wrld.buffer[i].a.y, \
+		wrld.buffer[i].b.x, wrld.buffer[i].b.y);
+		plot_line(wrld.mlx_ptr, wrld.win_ptr, \
+		wrld.buffer[i].a.x, wrld.buffer[i].a.y, \
+		wrld.buffer[i].c.x, wrld.buffer[i].c.y);
 		i++;
 	}
 }

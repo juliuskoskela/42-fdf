@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destruct_world.c                                   :+:      :+:    :+:   */
+/*   add_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 19:52:42 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:54 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:02:06 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 01:02:10 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/fdf.h"
 
-void			destruct_world(t_world *wrld, int verbose)
+t_world			add_camera(t_world out, t_camera new, int verbose)
 {
-	mtx_free(wrld->comp);
-	free(wrld);
+	out.cameras[out.cam_cnt] = new;
+	out.cam_cnt += 1;
 	if (verbose > 0)
-		printf("\nWorld destructed!\n\n");
+		printf("Camera added!\n\n");
+	return (activate_camera(out, out.cam_cnt - 1, verbose));
 }

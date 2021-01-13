@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_world_buffer.c                                       :+:      :+:    :+:   */
+/*   add_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 04:14:26 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/04 04:45:45 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:02:35 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/01/13 01:02:39 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			proc_buff(t_dlist *buff, t_mtx *comp, int verbose)
+t_world			add_object(t_world out, t_object new, int verbose)
 {
-	t_mtx		*cast;
-	t_mtx		*mult;
-
-	mult = mtx_new("tmp", 1, 4);
-	while (buff)
-	{
-		if ((cast = buff->content) != NULL)
-		{
-			mtx_multiply(mult, comp, cast);
-			mtx_cpy(cast, mult);
-		}
-		buff = buff->next;
-	}
-	free(mult);
+	out.objects[out.obj_cnt] = new;
+	out.obj_cnt += 1;
+	out.vtx_cnt += new.vtx_cnt;
+	out.tri_cnt += new.tri_cnt;
 	if (verbose > 0)
-		printf("Buffer processed!\n\n");
+	{
+		printf("Object added!\n\n");
+		printf("tri_cnt = %zu!\nvtx_cnt = %zu\n\n", out.tri_cnt, out.vtx_cnt);
+		g_print_mtx(out.world_mtx);
+	}
+	return (out);
 }

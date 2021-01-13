@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2021/01/11 12:35:59 by jkoskela         ###   ########.fr        #
+#    Updated: 2021/01/13 01:04:43 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,27 @@ NAME	= fdf
 
 # src / obj files
 SRC		=	main.c \
-			comp_model.c \
-			comp_view.c \
+			compose_model.c \
+			compose_view.c \
 			shape_cube.c \
 			shape_tetra.c \
 			shape_file.c \
 			render.c \
 			look_at.c \
-			print_buff.c \
+			print_tri_arr.c \
+			allocate_buffer.c \
+			print_vct_arr.c \
+			grid_triangulation.c \
+			process_buffer.c \
+			get_mesh_dimensions.c \
+			key_callback.c \
+			create_mesh.c \
+			create_camera.c \
+			create_world.c \
+			activate_camera.c \
+			add_camera.c \
+			add_object.c \
+			process_world.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
