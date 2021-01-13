@@ -6,7 +6,7 @@
 #    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2021/01/13 01:04:43 by jkoskela         ###   ########.fr        #
+#    Updated: 2021/01/13 02:28:44 by jkoskela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		=	main.c \
 			add_camera.c \
 			add_object.c \
 			process_world.c \
+			draw_line.c \
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

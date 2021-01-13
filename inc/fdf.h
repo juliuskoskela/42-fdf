@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 06:07:20 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 02:07:47 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:45:41 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct		s_parse
 	t_dlist			*out;
 }					t_parse;
 
+void			draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1);
 t_object		create_mesh(char *file, char *name, int verbose);
 t_camera		create_camera(char *name, int verbose);
 t_world			create_world(char *name, int verbose);

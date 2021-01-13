@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:30:47 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 02:09:08 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 04:27:48 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,36 @@ int				key_callback(int keycode, t_world *wrld)
 {
 	if (!wrld->mlx_ptr || !wrld->win_ptr || keycode < 0)
 		error("Error in key callback params\n");
-	// Left
+	// Rotate Left
 	if (keycode == 123)
-	{
 		*wrld = rotate_camera(*wrld, -1, 0, 0);
-	}
-	// Right
+	// Rotate Right
 	else if (keycode == 124)
-	{
 		*wrld = rotate_camera(*wrld, 1, 0, 0);
-	}
-	// Down
+	// Rotate Down
 	else if (keycode == 125)
-	{
 		*wrld = rotate_camera(*wrld, 0, -1, 0);
-	}
-	// Up
+	// Rotate Up
 	else if (keycode == 126)
-	{
 		*wrld = rotate_camera(*wrld, 0, 1, 0);
-	}
+	// Move forward
+	else if (keycode == 12)
+		*wrld = move_camera(*wrld, 0, 0, 1);
+	// Move backward
+	else if (keycode == 14)
+		*wrld = move_camera(*wrld, 0, 0, -1);
+	// Move up
+	else if (keycode == 13)
+		*wrld = move_camera(*wrld, 0, 1, 0);
+	// Move down
+	else if (keycode == 1)
+		*wrld = move_camera(*wrld, 0, -1, 0);
+	// Move left
+	else if (keycode == 0)
+		*wrld = move_camera(*wrld, -1, 0, 0);
+	// Move right
+	else if (keycode == 2)
+		*wrld = move_camera(*wrld, 1, 0, 0);
 	// Exit
 	else if (keycode == 53)
 	{

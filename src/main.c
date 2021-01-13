@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 03:43:04 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 02:05:46 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:28:05 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ int				main(int argc, char **argv)
 	wrld = add_camera(wrld, cam1, verbose);
 	wrld = add_object(wrld, mesh, verbose);
 	wrld = process_world(wrld, verbose);
-	wrld.mlx_ptr = mlx_init();
-	wrld.win_ptr = mlx_new_window(wrld.mlx_ptr, RESX, RESY, wrld.name);
-	mlx_key_hook(wrld.win_ptr, key_callback, &wrld);
 	render(wrld);
-	mlx_loop(wrld.mlx_ptr);
 	return (0);
 }

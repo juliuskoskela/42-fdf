@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 03:21:13 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 21:07:54 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:16:25 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_mtx4			compose_view(t_camera cam, int verbose)
 	cam.tr = g_transpose(cam.rotation);
 	cam.ovct = g_opp(cam.position);
 	cam.tt = g_translate(cam.ovct);
-	tmp = g_mult_mtx(cam.tr, cam.tt);
+	tmp = g_mult_mtx(cam.tt, cam.tr);
 	if (verbose > 0)
 		print_method(cam);
 	return (tmp);
