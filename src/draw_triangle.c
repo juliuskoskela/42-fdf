@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 20:15:56 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 22:03:54 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/01/21 17:16:38 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,75 +61,94 @@ t_tri		g_sort_tri_y(t_tri tri)
 	return (out);
 }
 
-void			fill_bottom(void *mlx, void *win,t_vct4 v1, t_vct4 v2, t_vct4 v3)
+void			fill_bottom(t_world *wrld,t_vct4 v1, t_vct4 v2, t_vct4 v3)
 {
 	t_vct4		org;
 	t_vct4		dst;
-	float		invslope1;
-	float		invslope2;
+	float		slope_1;
+	float		slope_2;
 	float		curx1;
 	float		curx2;
-	int			scanlineY;
+	int			scanline;
 
-	invslope1 = (v2.x - v1.x) / (v2.y - v1.y);
-	invslope2 = (v3.x - v1.x) / (v3.y - v1.y);
+	slope_1 = (v2.x - v1.x) / (v2.y - v1.y);
+	slope_2 = (v3.x - v1.x) / (v3.y - v1.y);
 	curx1 = v1.x;
 	curx2 = v1.x;
-	scanlineY = v1.y;
-	while (scanlineY <= v2.y)
+	scanline = v1.y;
+	while (scanline <= (int)v2.y)
 	{
-		org = g_vct4((int)curx1, scanlineY, 0, 0);
-		dst = g_vct4((int)curx2, scanlineY, 0, 0);
-		draw_line(mlx, win, org, dst);
-		curx1 += invslope1;
-		curx2 += invslope2;
-		scanlineY++;
+		org = g_vct4(curx1, scanline, 0, 0);
+		dst = g_vct4(curx2, scanline, 0, 0);
+		draw_line(wrld, org, dst);
+		curx1 += slope_1;
+		curx2 += slope_2;
+		scanline++;
 	}
 }
 
-void			fill_top(void *mlx, void *win, t_vct4 v1, t_vct4 v2, t_vct4 v3)
+void			fill_top(t_world *wrld, t_vct4 v1, t_vct4 v2, t_vct4 v3)
 {
 	t_vct4		org;
 	t_vct4		dst;
-	float		invslope1;
-	float		invslope2;
+	float		slope_1;
+	float		slope_2;
 	float		curx1;
 	float		curx2;
-	int 		scanlineY;
+	int 		scanline;
 
-	invslope1 = (v3.x - v1.x) / (v3.y - v1.y);
-	invslope2 = (v3.x - v2.x) / (v3.y - v2.y);
+	slope_1 = (v3.x - v1.x) / (v3.y - v1.y);
+	slope_2 = (v3.x - v2.x) / (v3.y - v2.y);
 	curx1 = v3.x;
 	curx2 = v3.x;
-	scanlineY = v3.y;
-	while (scanlineY > v1.y)
+	scanline = v3.y;
+	while (scanline >= (int)v1.y)
 	{
-		org = g_vct4((int)curx1, scanlineY, 0, 0);
-		dst = g_vct4((int)curx2, scanlineY, 0, 0);
-		draw_line(mlx, win, org, dst);
-		curx1 -= invslope1;
-		curx2 -= invslope2;
-		scanlineY--;
+		org = g_vct4(curx1, scanline, 0, 0);
+		dst = g_vct4(curx2, scanline, 0, 0);
+		draw_line(wrld, org, dst);
+		curx1 -= slope_1;
+		curx2 -= slope_2;
+		scanline--;
 	}
 }
 
-void			draw_triangle(void *mlx, void *win, t_tri tri)
+void			draw_triangle(t_world *wrld, t_tri tri)
 {
 	t_vct4		v4;
+	t_vct4		light;
+	t_vct4		face_normal;
+	double		face_ratio = 0;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+	uint32_t	shade;
+
+	r = 255 * face_ratio;
+	g = 255 * face_ratio;
+	b = 255 * face_ratio;
+	shade = (r << 16) + (g << 8) + b;
+	tri.a.hex = shade;
+	tri.b.hex = shade;
+	tri.c.hex = shade;
+	light = g_vct4(200, 200, 200, 1);
+	face_normal = g_cross(g_sub (tri.b, tri.a), g_sub(tri.c, tri.a));
+	face_ratio = g_dot(face_normal, light);
 
 	tri = g_sort_tri_y(tri);
 	if ((int64_t)tri.b.y == (int64_t)tri.c.y)
-		fill_bottom(mlx, win, tri.a, tri.b, tri.c);
+		fill_bottom(wrld, tri.a, tri.b, tri.c);
 	else if ((int64_t)tri.a.y == (int64_t)tri.b.y)
-		fill_top(mlx, win, tri.a, tri.b, tri.c);
+		fill_top(wrld, tri.a, tri.b, tri.c);
 	else
 	{
-		v4 = g_vct4( \
-		(int64_t)(tri.a.x \
-		+ ((float)(tri.b.y - tri.b.y)
-		/ (float)(tri.c.y - tri.a.y))
-		* (tri.c.x - tri.a.x)), tri.b.y, 0, 0);
-		fill_bottom(mlx, win, tri.a, tri.b, v4);
-		fill_top(mlx, win, tri.a, v4, tri.c);
+		v4 = g_vct4(tri.a.x \
+		+ (tri.b.y - tri.b.y) \
+		/ (tri.c.y - tri.a.y) \
+		* (tri.c.x - tri.a.x) \
+		, tri.b.y, \
+		0, 0);
+		fill_bottom(wrld, tri.a, tri.b, v4);
+		fill_top(wrld, tri.a, v4, tri.c);
 	}
 }
