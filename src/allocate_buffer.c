@@ -6,17 +6,20 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:57:00 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 21:19:25 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/03/06 00:21:37 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_tri			*allocate_buffer(size_t size)
+t_buffer		allocate_buffer(size_t size)
 {
-	t_tri		*out;
+	t_buffer	new;
 
-	if (!(out = (t_tri *)v_alloc(sizeof(t_tri) * size)))
-		error("Malloc failure in allocating buffer.\n");
-	return (out);
+	new.size = size;
+	if (!(new.tri = (t_tri *)v_alloc(sizeof(t_tri) * size)))
+		error("FATAL ERROR: Malloc failed in create_buffer!\n");
+	if (g_verbose > 0)
+		printf("SUCCESS: Buffer of size %zu created!\n", new.size);
+	return (new);
 }

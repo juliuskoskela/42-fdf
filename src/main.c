@@ -6,32 +6,35 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 03:43:04 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 23:45:21 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:39:44 by julius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static void		check_arguments(int argc, char **argv)
-{
-	if (argc < 0)
-		error("Too few arguments.\n");
-	if (argv[1])
-		printf("Arg 1 ok!\n");
-}
-
 int				main(int argc, char **argv)
 {
-	t_world		wrld;
-	t_object	mesh;
-	int			verbose;
+	t_model		model_1;
+	t_camera	cam_0;
+	t_world		world;
 
-	verbose = 0;
-	check_arguments(argc, argv);
-	mesh = create_mesh(argv[1], "Mesh 1", verbose);
-	wrld = create_world("Space", verbose);
-	wrld = add_object(wrld, mesh, verbose);
-	wrld = process_world(wrld, verbose);
-	render(wrld);
-	return (0);
+	g_verbose = 0;
+	if (argc > 2 || !argv[0])
+		return (-1);
+	model_1 = create_model(0);
+	parse_file(&model_1, argv[1]);
+	model_1.dim = get_mesh_dimensions(model_1.vtx, model_1.vtx_cnt);
+	model_1.buffer.size = ((model_1.dim.x - 1) * (model_1.dim.z - 1)) * 2;
+	model_1.buffer.tri = (t_tri *)v_alloc(sizeof(t_tri) * model_1.buffer.size);
+	model_1.buffer.tri = grid_triangulation(
+	model_1.buffer.tri, model_1.vtx, model_1.dim.x, model_1.vtx_cnt);
+	model_1.scale = 1;
+	cam_0 = create_camera((t_vct4) {45, RESX / RESY, 0.1, 1000}, 0);
+	world = create_world(cam_0);
+	world.buffer.size = 0;
+	world.projection = PERSPECTIVE;
+	add_model(&world, &model_1);
+	mlx_key_hook(world.win, key_callback, &world);
+	mlx_loop_hook(world.mlx, loop_callback, &world);
+	mlx_loop(world.mlx);
 }

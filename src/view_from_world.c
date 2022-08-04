@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_world.c                                     :+:      :+:    :+:   */
+/*   view_from_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 13:20:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/03/02 08:56:12 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/03/05 23:38:59 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			create_world(t_camera cam)
+size_t			view_from_world(t_world *wld)
 {
-	t_world		wld;
+	t_mtx4		m;
+	size_t		i;
 
-	wld.mlx = mlx_init();
-	wld.win = mlx_new_window(wld.mlx, RESX, RESY, "window");
-	wld.buffer = allocate_buffer(MAX_BUFFER);
-	wld.models = (t_model *)v_alloc(sizeof(t_model) * MAX_MODELS);
-	wld.a_cam = cam;
-	wld.obj_cnt = 0;
+	m = g_view(wld->a_cam.rot, wld->a_cam.pos);
+	i = process_buffer(&wld->buffer, m);
 	if (g_verbose > 0)
-		printf("SUCCESS: World created!\n");
-	return (wld);
+		printf("SUCCESS: %zu world vertices converted to view space!\n", i);
+	return (i);
 }

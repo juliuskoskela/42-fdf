@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_world.c                                     :+:      :+:    :+:   */
+/*   print_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 13:20:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/03/02 08:16:33 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/03/06 00:22:44 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			create_world(t_camera cam)
+void			print_buffer(t_buffer buffer)
 {
-	t_world		wld;
+	size_t		i;
 
-	wld.mlx = mlx_init();
-	wld.win = mlx_new_window(wld.mlx, RESX, RESY, "window");
-	wld.buffer = allocate_buffer(MAX_BUFFER);
-	wld.models = (t_model *)v_alloc(sizeof(t_model) * MAX_MODELS);
-	wld.a_cam = cam;
-	wld.obj_cnt = 0;
-	if (g_verbose > 0)
-		printf("SUCCESS: World created!\n");
-	return (wld);
+	i = 0;
+	while (i < buffer.size)
+	{
+		g_print_vct(buffer.tri[i].a, i);
+		g_print_vct(buffer.tri[i].b, i);
+		g_print_vct(buffer.tri[i].c, i);
+		i++;
+	}
 }

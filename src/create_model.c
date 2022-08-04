@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_world.c                                     :+:      :+:    :+:   */
+/*   create_model.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 13:20:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:00:12 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/03/08 16:32:23 by julius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			create_world(t_camera cam)
+t_model		create_model(size_t id)
 {
-	t_world		wld;
+	t_model	obj;
 
-	wld.mlx = mlx_init();
-	wld.win = mlx_new_window(wld.mlx, RESX, RESY, "window");
-	wld.buffer = allocate_buffer(MAX_BUFFER);
-	wld.models = (t_model *)v_alloc(sizeof(t_model) * MAX_MODELS);
-	wld.a_cam = cam;
-	wld.obj_cnt = 0;
+	obj.id = id;
+	obj.scale = 1;
+	obj.pos = (t_vct4) {0.0, 0.0, 0.0, 1.0};
+	obj.rot = (t_vct4) {0.0, 0.0, 0.0, 1.0};
 	if (g_verbose > 0)
-		printf("SUCCESS: World created!\n");
-	return (wld);
+		printf("SUCCESS: Object created!\n");
+	return (obj);
 }

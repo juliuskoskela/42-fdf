@@ -1,89 +1,78 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/12/06 11:43:35 by jkoskela          #+#    #+#              #
-#    Updated: 2021/01/13 22:00:39 by jkoskela         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		=	fdf
 
-NAME	= fdf
+SRC_LIST	=	main.c \
+				allocate_buffer.c \
+				destroy_buffer.c \
+				process_buffer.c \
+				print_buffer.c \
+				add_model.c \
+				draw_line.c \
+				create_model.c \
+				create_camera.c \
+				create_world.c \
+				world_from_model.c \
+				view_from_world.c \
+				clip_from_view.c \
+				window_from_clip.c \
+				grid_triangulation.c \
+				parse_file.c \
+				loop_callback.c \
+				key_callback.c \
+				get_mesh_dimensions.c \
 
-# src / obj files
-SRC		=	main.c \
-			compose_model.c \
-			compose_view.c \
-			shape_cube.c \
-			shape_tetra.c \
-			shape_file.c \
-			render.c \
-			look_at.c \
-			print_tri_arr.c \
-			allocate_buffer.c \
-			print_vct_arr.c \
-			grid_triangulation.c \
-			process_buffer.c \
-			get_mesh_dimensions.c \
-			key_callback.c \
-			create_mesh.c \
-			create_camera.c \
-			create_world.c \
-			activate_camera.c \
-			add_camera.c \
-			add_object.c \
-			process_world.c \
-			draw_line.c \
-			draw_circle.c \
-			draw_triangle.c \
+SRC_DIR		=	src/
+OBJ_DIR		=	obj/
+INC_DIR		=	inc/
+MLX_DIR		=	minilibx-linux/
+LIB_DIR		=	libft/
+LIBFT_A		=	$(LIB_DIR)libft.a
+USR_INC		=	/usr/include
+INC_DIRS	=	$(LIB_DIR) $(USR_INC) $(MLX_DIR) $(SRC_DIR)
+USR_LIB		=	/usr/lib
+MLX_A		=	$(MLX_DIR)libmlx.a
 
-OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+INC			=	$(addprefix $(INC_DIR), fdf.h)
+SRC			=	$(addprefix $(SRC_DIR), $(SRC_LIST))
+OBJ			=	$(SRC:$(SRC_DIR)%=$(OBJ_DIR)%.o)
+RM			=	/bin/rm -rf
+CC			=	clang
+FSANA		=	-fsanitize=address
+FSANL		=	-fsanitize=leak
+FSANU		=	-fsanitize=undefined
+CFLAGS		=	-Wall -Wextra -Werror -O3
+INCLUDES	=	$(addprefix -I,$(INC_DIRS))
 
-# compiler
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+all: $(NAME)
 
-# mlx library
-MLX		= ./minilibx/
-MLX_LIB	= $(addprefix $(MLX),mlx.a)
-MLX_INC	= -I /usr/X11/include -g
-MLX_LNK	= -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+$(OBJ_DIR):
+	mkdir -p $@
 
-# ft library
-FT		= ./libft/
-FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I ./libft
-FT_LNK	= -L ./libft -l ft
+$(OBJ): | $(OBJ_DIR)
 
-# directories
-SRCDIR	= ./src/
-INCDIR	= ./inc/
-OBJDIR	= ./obj/
+$(OBJ): $(OBJ_DIR)%.o: $(SRC_DIR)% $(INC)
+	$(CC) $(CFLAGS) -c $(INCLUDES) $< -o $@
 
-all: obj $(FT_LIB) $(NAME)
+$(LIBFT_A):
+	make -C $(LIB_DIR)
 
-obj:
-	mkdir -p $(OBJDIR)
+$(MLX_A):
+	make -C $(MLX_DIR)
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+$(NAME): $(LIBFT_A) $(MLX_A) $(OBJ)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx -L$(USR_LIB) -Llibft/ -lft -Imlx_linux -lpthread -lXext -lX11 -lm -lz -o $@
 
-$(FT_LIB):
-	make -C $(FT)
+cleanobj:
+	$(RM) $(wildcard $(OBJ))
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
+cleanobjdir: cleanobj
+	$(RM) $(OBJ_DIR)
 
-clean:
-	rm -rf $(OBJDIR)
-	make -C $(FT) clean
-	make -C $(MLX) clean
+clean: cleanobjdir
+	make -C $(MLX_DIR) clean
+	make -C $(LIB_DIR) clean
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf a.out.dSYM
-	make -C $(FT) fclean
+	$(RM) $(NAME)
+	$(RM) $(LIBFT_A)
 
 re: fclean all

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 20:48:54 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/12 21:24:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/03/06 12:26:59 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/03/06 12:27:27 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static double	get_height(t_vct4 *shape, size_t size)
 	out = 0;
 	while (i < size)
 	{
-		if (out < shape[i].y)
-			out = shape[i].y;
+		if (out < m_fabs(shape[i].y))
+			out = m_fabs(shape[i].y);
 		i++;
 	}
 	return (out);

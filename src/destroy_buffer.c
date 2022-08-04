@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_world.c                                     :+:      :+:    :+:   */
+/*   destroy_buffer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 13:20:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/03/02 09:33:18 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/03/06 00:21:51 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			create_world(t_camera cam)
+void			destroy_buffer(t_buffer *buffer)
 {
-	t_world		wld;
-
-	wld.mlx = mlx_init();
-	wld.win = mlx_new_window(wld.mlx, RESX, RESY, "window");
-	wld.buffer = allocate_buffer(MAX_BUFFER);
-	wld.models = (t_model *)v_alloc(sizeof(t_model) * MAX_MODELS);
-	wld.a_cam = cam;
-	wld.obj_cnt = 0;
+	free(buffer->tri);
+	buffer->size = 0;
+	buffer = NULL;
 	if (g_verbose > 0)
-		printf("SUCCESS: World created!\n");
-	return (wld);
+		printf("SUCCESS: Buffer destroyed!\n");
 }

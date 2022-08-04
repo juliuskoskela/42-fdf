@@ -6,117 +6,113 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 06:07:20 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/01/13 23:41:04 by jkoskela         ###   ########.fr       */
+/*   Updated: 2021/03/08 21:30:38 by julius           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# define MAX_BUFF 100000
-# define RESX 1920
-# define RESY 1280
+# define MAX_BUFFER 1000000
+# define MAX_MODELS 5
+# define RESX 720
+# define RESY 360
 # include <string.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdint.h>
 # include "../libft/inc/libft.h"
 # include "../inc/mlx.h"
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_Q 113
+# define KEY_E 101
+# define KEY_1 49
+# define KEY_2 50
+# define KEY_3 51
+# define KEY_4 52
+# define KEY_C 99
+# define KEY_R 114
+# define KEY_F 102
+# define KEY_G 103
+# define KEY_H 104
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define WHITE 0XFFFFFF
+# define PERSPECTIVE 0X1
+# define ORTHOGRAPHIC 0X2
+# define SCREEN_OFFSET_X 0
+# define SCREEN_OFFSET_Y 0
+
+typedef struct		s_buffer
+{
+	size_t			size;
+	t_tri			*tri;
+}					t_buffer;
 
 typedef struct		s_camera
 {
-	int				index;
+	size_t			id;
+	double			fov;
 	double			ratio;
 	double			near;
 	double			far;
-	double			fov;
-	t_vct4			position;
-	t_vct4			direction;
-	t_vct4			ovct;
-	t_mtx4			tt;
-	t_mtx4			tr;
-	t_mtx4			rotx;
-	t_mtx4			roty;
-	t_mtx4			rotz;
-	t_mtx4			rotation;
-	t_mtx4			view_mtx;
-	t_mtx4			proj_mtx;
+	t_vct4			pos;
+	t_vct4			rot;
 }					t_camera;
 
-typedef struct		s_object
+typedef struct		s_model
 {
-	char			*name;
+	size_t			id;
 	double			scale;
-	t_vct4			dimensions;
-	t_vct4			position;
-	t_vct4			direction;
-	t_mtx4			rotx;
-	t_mtx4			roty;
-	t_mtx4			rotz;
-	t_mtx4			rotation;
-	t_mtx4			translation;
-	t_mtx4			transformation;
-	t_mtx4			model_mtx;
+	t_vct4			pos;
+	t_vct4			rot;
+	t_vct4			dim;
+	t_vct4			*vtx;
 	size_t			vtx_cnt;
-	size_t			tri_cnt;
-	t_vct4			*shape;
-	t_tri			*buffer;
-}					t_object;
+	t_buffer		buffer;
+}					t_model;
 
 typedef struct		s_world
 {
-	char			*name;
-	void			*mlx_ptr;
-	void			*win_ptr;
-	t_mtx4			projection;
-	t_mtx4			world_mtx;
+	size_t			projection;
+	void			*mlx;
+	void			*win;
+	t_model			*models;
 	size_t			obj_cnt;
-	size_t			cam_cnt;
-	size_t			vtx_cnt;
-	size_t			tri_cnt;
-	t_camera		active_camera;
-	t_camera		camera_1;
-	t_camera		camera_2;
-	t_camera		camera_3;
-	t_htable		*cams;
-	t_object		*objects;
-	t_tri			*buffer;
+	t_camera		a_cam;
+	t_buffer		buffer;
 }					t_world;
 
-typedef struct		s_parse
-{
-	int				fd;
-	int				i;
-	int				j;
-	int				sign;
-	char			*tmp;
-	char			*line;
-	t_dlist			*out;
-}					t_parse;
+int					g_verbose;
 
-t_object		create_mesh(char *file, char *name, int verbose);
-t_object		shape_cube(t_object obj);
-t_object		shape_tetra(t_object obj);
-t_object		shape_file(t_object obj, char *file);
-t_camera		create_camera(int verbose);
-t_world			create_world(char *name, int verbose);
-t_world			activate_camera(t_world out, size_t i, int verbose);
-t_world			add_camera(t_world out, t_camera new, int index, int verbose);
-t_world			add_object(t_world out, t_object new, int verbose);
-t_world			process_world(t_world out, int verbose);
-t_tri			*allocate_buffer(size_t size);
-t_tri			*grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size);
-t_tri			*process_buffer(t_tri *d, t_tri *s, t_mtx4 mtx, size_t size);
-t_vct4			get_mesh_dimensions(t_vct4 *shape, size_t size);
-t_mtx4			compose_model(t_object obj, int verbose);
-t_mtx4			compose_view(t_camera cam, int verbose);
-t_mtx4			look_at(t_vct4 from, t_vct4 to, int vebrose);
-void			print_vct_arr(t_vct4 *arr, size_t size);
-void			print_tri_arr(t_tri *arr, size_t size);
-void			render(t_world wrld);
-void			draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1);
-void			draw_circle(void *mlx, void *win, t_vct4 offset, int radius);
-void			draw_triangle(void *mlx, void *win, t_tri tri);
-int				key_callback(int keycode, t_world *wrld);
-int				main(int argc, char **argv);
+t_buffer			allocate_buffer(size_t size);
+void				add_model(t_world *wld, t_model *new_model);
+void				print_buffer(t_buffer buffer);
+size_t				process_buffer(t_buffer *v, t_mtx4 m);
+void				destroy_buffer(t_buffer *buffer);
+int					key_callback(int keycode, t_world *w);
+int					loop_callback(t_world *world);
+
+t_camera			create_camera(t_vct4 vrs, size_t id);
+t_model				create_model(size_t id);
+t_world				create_world(t_camera cam);
+
+size_t				world_from_model(t_world *wld);
+size_t				view_from_world(t_world *wld);
+size_t				clip_from_view(t_world *wld);
+size_t				window_from_clip(t_world *wld);
+
+void				parse_file(t_model *mod, char *file);
+void				draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1);
+t_tri				*grid_triangulation(t_tri *d, t_vct4 *s,
+					size_t w, size_t size);
+t_vct4				get_mesh_dimensions(t_vct4 *shape, size_t size);
+
+int					main(int argc, char **argv);
 
 #endif

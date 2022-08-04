@@ -8,6 +8,7 @@
 		"utility": "c",
 		"cmath": "c",
 		"complex": "c",
-		"functional": "c"
+		"functional": "c",
+		"fdf.h": "c"
 	}
 }

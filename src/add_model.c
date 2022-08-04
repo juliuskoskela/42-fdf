@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_world.c                                     :+:      :+:    :+:   */
+/*   add_model.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 01:01:11 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 13:20:46 by jkoskela         ###   ########.fr       */
+/*   Created: 2021/01/13 01:02:35 by jkoskela          #+#    #+#             */
+/*   Updated: 2021/04/27 02:06:10 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_world			create_world(t_camera cam)
+void			add_model(t_world *wld, t_model *new)
 {
-	t_world		wld;
-
-	wld.mlx = mlx_init();
-	wld.win = mlx_new_window(wld.mlx, RESX, RESY, "window");
-	wld.buffer = allocate_buffer(MAX_BUFFER);
-	wld.models = (t_model *)v_alloc(sizeof(t_model) * MAX_MODELS);
-	wld.a_cam = cam;
-	wld.obj_cnt = 0;
+	wld->buffer.size += new->buffer.size;
+	if (wld->obj_cnt == MAX_MODELS)
+	{
+		printf("ERROR: Maximum object count reached, can't add object!\n");
+		return ;
+	}
+	wld->models[wld->obj_cnt] = *new;
+	wld->obj_cnt += 1;
 	if (g_verbose > 0)
-		printf("SUCCESS: World created!\n");
-	return (wld);
+		printf("SUCCESS: Object added to world!\n");
 }
