@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 06:07:20 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 21:30:38 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:40:30 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FDF_H
 # define MAX_BUFFER 1000000
 # define MAX_MODELS 5
-# define RESX 720
-# define RESY 360
+# define RESX 1280
+# define RESY 720
 # include <string.h>
 # include <math.h>
 # include <stdio.h>

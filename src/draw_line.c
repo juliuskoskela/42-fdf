@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 21:10:51 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/02 19:03:13 by jkoskela         ###   ########.fr       */
+/*   Updated: 2022/08/04 03:41:44 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static int		*assign_variables(t_vct4 v0, t_vct4 v1)
+static int *assign_variables(t_vct4 v0, t_vct4 v1)
 {
-	int			*vars;
+	int	*vars;
 
 	vars = (int *)v_alloc(sizeof(int) * 10);
 	vars[0] = v0.x;
@@ -29,9 +29,9 @@ static int		*assign_variables(t_vct4 v0, t_vct4 v1)
 	return (vars);
 }
 
-void			draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1)
+void draw_line(void *mlx, void *win, t_vct4 v0, t_vct4 v1)
 {
-	int			*vars;
+	int	*vars;
 
 	vars = assign_variables(v0, v1);
 	while (1)

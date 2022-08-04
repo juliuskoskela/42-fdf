@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 08:36:06 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/09 16:22:15 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:55 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static t_vct4	parse_line(t_model *mod, char *line, t_vct4 i)
+static t_vct4 parse_line(t_model *mod, char *line, t_vct4 i)
 {
-	char		tmp[100];
+	char	tmp[100];
 
 	while (line[(size_t)i.w])
 	{
@@ -38,18 +38,18 @@ static t_vct4	parse_line(t_model *mod, char *line, t_vct4 i)
 	return ((t_vct4) {0.0, i.y, i.z += 1.0, 0.0});
 }
 
-static int		parse(t_model *mod, int fd, char *line, t_vct4 i)
+static int parse(t_model *mod, int fd, char *line, t_vct4 i)
 {
-	int			ret;
+	int	ret;
 
 	while ((ret = fd_readline(fd, &line)) > 0)
 		i = parse_line(mod, line, i);
 	return (ret);
 }
 
-void			parse_file(t_model *mod, char *file)
+void parse_file(t_model *mod, char *file)
 {
-	int			fd;
+	int	fd;
 
 	mod->vtx_cnt = 0;
 	mod->vtx = (t_vct4 *)v_alloc(sizeof(t_vct4) * MAX_BUFFER);

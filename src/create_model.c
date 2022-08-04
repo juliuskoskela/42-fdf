@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 01:00:12 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 16:32:23 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_model		create_model(size_t id)
+t_model create_model(size_t id)
 {
 	t_model	obj;
 

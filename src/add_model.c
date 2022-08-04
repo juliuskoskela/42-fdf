@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 01:02:35 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/04/27 02:06:10 by jkoskela         ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			add_model(t_world *wld, t_model *new)
+void add_model(t_world *wld, t_model *new)
 {
 	wld->buffer.size += new->buffer.size;
 	if (wld->obj_cnt == MAX_MODELS)

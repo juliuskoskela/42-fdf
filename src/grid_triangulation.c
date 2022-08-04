@@ -6,7 +6,7 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:55:21 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 17:23:38 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:21 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **	folding diagonal.
 */
 
-void			choose_diagonal(t_tri *d, t_vct4 *s, size_t w)
+void choose_diagonal(t_tri *d, t_vct4 *s, size_t w)
 {
 	if (g_mag(g_sub(s[0], s[w + 1]))
 		< g_mag(g_sub(s[1], s[w])))
@@ -42,11 +42,11 @@ void			choose_diagonal(t_tri *d, t_vct4 *s, size_t w)
 **	chooses the correct folding axis for each "square".
 */
 
-t_tri			*grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size)
+t_tri *grid_triangulation(t_tri *d, t_vct4 *s, size_t w, size_t size)
 {
-	size_t		i;
-	size_t		j;
-	size_t		k;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
 	j = 0;

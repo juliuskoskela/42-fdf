@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:47:50 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/05 23:38:59 by jkoskela         ###   ########.fr       */
+/*   Updated: 2022/08/04 03:43:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-size_t			process_buffer(t_buffer *v, t_mtx4 m)
+size_t process_buffer(t_buffer *v, t_mtx4 m)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (i < v->size)

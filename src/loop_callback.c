@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:57:45 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 22:37:30 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:31 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			render_buffer(t_buffer *b, void *mlx, void *win)
+void render_buffer(t_buffer *b, void *mlx, void *win)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (i < b->size)
@@ -30,7 +30,7 @@ void			render_buffer(t_buffer *b, void *mlx, void *win)
 	}
 }
 
-int				loop_callback(t_world *w)
+int loop_callback(t_world *w)
 {
 	if (w->projection == PERSPECTIVE)
 	{

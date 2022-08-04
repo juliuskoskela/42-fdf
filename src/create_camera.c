@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 01:00:44 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 16:34:32 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:57:11 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-t_camera		create_camera(t_vct4 vrs, size_t id)
+t_camera create_camera(t_vct4 vrs, size_t id)
 {
 	t_camera	cam;
 

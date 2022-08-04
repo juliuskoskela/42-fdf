@@ -6,16 +6,16 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 12:26:59 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 12:27:27 by jkoskela         ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:08 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static double	get_width(t_vct4 *shape, size_t size)
+static double get_width(t_vct4 *shape, size_t size)
 {
-	size_t		i;
-	double		out;
+	size_t	i;
+	double	out;
 
 	i = 0;
 	out = 0;
@@ -28,10 +28,10 @@ static double	get_width(t_vct4 *shape, size_t size)
 	return (out);
 }
 
-static double	get_height(t_vct4 *shape, size_t size)
+static double get_height(t_vct4 *shape, size_t size)
 {
-	size_t		i;
-	double		out;
+	size_t	i;
+	double	out;
 
 	i = 0;
 	out = 0;
@@ -44,10 +44,10 @@ static double	get_height(t_vct4 *shape, size_t size)
 	return (out);
 }
 
-static double	get_depth(t_vct4 *shape, size_t size)
+static double get_depth(t_vct4 *shape, size_t size)
 {
-	size_t		i;
-	double		out;
+	size_t	i;
+	double	out;
 
 	i = 0;
 	out = 0;
@@ -60,9 +60,9 @@ static double	get_depth(t_vct4 *shape, size_t size)
 	return (out);
 }
 
-t_vct4			get_mesh_dimensions(t_vct4 *shape, size_t size)
+t_vct4 get_mesh_dimensions(t_vct4 *shape, size_t size)
 {
-	t_vct4		out;
+	t_vct4	out;
 
 	out.x = get_width(shape, size) + 1;
 	out.y = get_height(shape, size) + 1;

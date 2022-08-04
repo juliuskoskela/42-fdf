@@ -6,13 +6,13 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:30:47 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/08 20:16:07 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 03:41:07 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			modify_world(t_world *w, int keycode)
+void modify_world(t_world *w, int keycode)
 {
 	if (keycode == KEY_LEFT)
 		w->a_cam.rot.x--;
@@ -36,7 +36,7 @@ void			modify_world(t_world *w, int keycode)
 		w->a_cam.pos.y--;
 }
 
-int				key_callback(int keycode, t_world *w)
+int key_callback(int keycode, t_world *w)
 {
 	if (!w->mlx || !w->win || keycode < 0)
 		error("Error in key callback params!\n");

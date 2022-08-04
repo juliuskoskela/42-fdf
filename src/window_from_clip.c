@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:58:46 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/09 16:07:55 by julius           ###   ########.fr       */
+/*   Updated: 2022/08/04 04:01:48 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-static t_vct4	pers_div(t_vct4 v_c)
+static t_vct4 pers_div(t_vct4 v_c)
 {
-	t_vct4		v_d;
+	t_vct4	v_d;
 
 	v_d.x = v_c.x / v_c.w;
 	v_d.y = v_c.y / v_c.w;
@@ -23,9 +23,9 @@ static t_vct4	pers_div(t_vct4 v_c)
 	return (v_d);
 }
 
-static t_vct4	win_stretch(t_vct4 v_d)
+static t_vct4 win_stretch(t_vct4 v_d)
 {
-	t_vct4		v_s;
+	t_vct4	v_s;
 
 	v_s.x = (RESX * (v_d.x + 1)) / 2 + SCREEN_OFFSET_X;
 	v_s.y = (RESY * (v_d.y + 1)) / 2 + SCREEN_OFFSET_Y;
@@ -34,9 +34,9 @@ static t_vct4	win_stretch(t_vct4 v_d)
 	return (v_s);
 }
 
-size_t			window_from_clip(t_world *wld)
+size_t window_from_clip(t_world *wld)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (i < wld->buffer.size)
@@ -61,7 +61,7 @@ size_t			window_from_clip(t_world *wld)
 **
 **	WINDOW_FROM_CLIP
 **
-**	! This is actually two steps combines. It does perspective division and
+**	! This is actually two steps combined. It does perspective division and
 **	then stretches the x and y coordinates to the window.
 **
 **  ----------------------------------------------------------------------------

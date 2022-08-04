@@ -6,15 +6,15 @@
 /*   By: jkoskela <jkoskela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 08:16:33 by jkoskela          #+#    #+#             */
-/*   Updated: 2021/03/06 00:22:44 by jkoskela         ###   ########.fr       */
+/*   Updated: 2022/08/04 03:43:03 by jkoskela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void			print_buffer(t_buffer buffer)
+void print_buffer(t_buffer buffer)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (i < buffer.size)
